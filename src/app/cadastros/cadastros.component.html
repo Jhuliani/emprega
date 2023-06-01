@@ -1,0 +1,13 @@
+<p>Lista de Cadastros:</p>
+
+
+
+<div class="collection">
+  <a class="collection-item"
+   *ngFor="let cadastro of cadastros"
+   [routerLink]="['/cadastro', cadastro.id]">
+   {{ cadastro.nome }}</a>
+</div>
+
+<p>Página: {{ pagina }}</p>
+<button (click)="proximaPagina()"> Prox Página</button>
