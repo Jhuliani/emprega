@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CadastrosService } from '../cadastros/cadastros.service';
+import { CadastrosService } from '../cadastros.service';
 
 
 @Component({

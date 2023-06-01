@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col s6">
+    <p>Lista de Pessoas:</p>
+
+    <div class="collection">
+      <a class="collection-item" *ngFor="let pessoa of pessoas">
+        {{ pessoa.nome }}
+      </a>
+    </div>
+  </div>
+</div>
+<div class="col s6">
+  <router-outlet></router-outlet>
+</div>

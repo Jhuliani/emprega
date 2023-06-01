@@ -3,8 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { CadastrosComponent } from "./cadastros/cadastros.component";
 import { LoginComponent } from "./login/login.component";
-import { CadastroDetalheComponent } from './cadastro-detalhe/cadastro-detalhe.component';
-import { CadastroNaoEncontradoComponent } from './cadastro-nao-encontrado/cadastro-nao-encontrado.component';
+import { CadastroDetalheComponent } from './cadastros/cadastro-detalhe/cadastro-detalhe.component';
+import { CadastroNaoEncontradoComponent } from './cadastros/cadastro-nao-encontrado/cadastro-nao-encontrado.component';
 
 
 const APP_ROUTES: Routes = [
