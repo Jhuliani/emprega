@@ -1,11 +1,13 @@
-<nav>
+<nav *ngIf="mostrarMenu">
+
   <div class="nav-wrapper indigo darken-4">
-    <a routerLink="" class="brand-logo left"><i class="large material-icons" style="margin-left: 15px;">next_week</i>Emprega<br></a>
+    <a routerLink="" class="brand-logo left"><i class="large material-icons"
+        style="margin-left: 15px;">next_week</i>Emprega<br></a>
     <ul id="nav-mobile" class="right">
       <li routerLinkActive="active"><a routerLink="/cadastros" [queryParams]="{pagina:1}">Cadastros</a></li>
-<!--    <li routerLinkActive="active"><a [routerLink]="['cadastro', idCadastro.value]">Cadastro por ID</a></li> -->
+      <!-- <li routerLinkActive="active"><a [routerLink]="['cadastro', idCadastro.value]">Cadastro por ID</a></li> -->
       <li routerLinkActive="active"><a routerLink="/pessoas">Pessoas</a></li>
-      <li routerLinkActive="active"><a routerLink="/login"> <strong>Login</strong> </a></li>
+      <li routerLinkActive="active"><a routerLink="/login">Login</a></li>
     </ul>
   </div>
 </nav>
@@ -13,9 +15,8 @@
 
 
 <div class="container">
-<!--  <p>Entre com o ID desejado:</p>
-  <input #idCadastro>  -->
-<router-outlet></router-outlet>
+  <!-- <p>Entre com o ID desejado:</p>
+  <input #idCadastro> -->
+  <router-outlet></router-outlet>
 
 </div>
-

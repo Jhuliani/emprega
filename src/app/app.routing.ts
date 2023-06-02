@@ -8,11 +8,13 @@ import { CadastroNaoEncontradoComponent } from './cadastros/cadastro-nao-encontr
 
 
 const APP_ROUTES: Routes = [
-  {path: 'login', component: LoginComponent},
+
+  {path: 'login', component: LoginComponent },
   {path: 'cadastros', component: CadastrosComponent},
   {path: 'cadastro/:id', component: CadastroDetalheComponent},
   {path: 'naoEncontrado', component: CadastroNaoEncontradoComponent},
   {path: '', component: HomeComponent}
+
 ];
 
 export const routing: ModuleWithProviders<RouterModule> = RouterModule.forRoot(APP_ROUTES);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CadastrosService } from '../cadastros.service';
@@ -9,7 +9,7 @@ import { CadastrosService } from '../cadastros.service';
   templateUrl: './cadastro-detalhe.component.html',
   styleUrls: ['./cadastro-detalhe.component.css']
 })
-export class CadastroDetalheComponent {
+export class CadastroDetalheComponent implements OnInit, OnDestroy {
 
   id!: number;
   inscricao!: Subscription;
@@ -23,7 +23,7 @@ export class CadastroDetalheComponent {
 
 
   ngOnInit() {
-    this.cadastro = this.route.params.subscribe(
+    this.inscricao = this.route.params.subscribe(
       (params: any) => {
         this.id = params['id'];
 
@@ -32,14 +32,11 @@ export class CadastroDetalheComponent {
         if (this.cadastro == null){
           this.router.navigate(['/naoEncontrado']);
         }
-
     });
-
   }
 
   ngOnDestroy(){
     this.inscricao.unsubscribe();
   }
-
-
 }
+

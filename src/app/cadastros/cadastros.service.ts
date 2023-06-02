@@ -7,8 +7,8 @@ export class CadastrosService {
 
   getCadastros(){
     return[
-      {id: 1, nome: 'Mauricio Eduardo Gomes'},
-      {id: 2, nome: 'Marta Aparecida Santos'}
+      {id: 1, nome: 'Mauricio Eduardo Gomes', area: 'Comercial', nivel: 'PL'},
+      {id: 2, nome: 'Marta Aparecida Santos', area: 'Jurídico', nivel: 'JR'}
     ]
   }
 
