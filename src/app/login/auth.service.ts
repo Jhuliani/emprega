@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private usuarioAutenticado: boolean = false;
+   usuarioAutenticado: boolean = false;
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
 
@@ -27,6 +27,11 @@ export class AuthService {
 
     }
   }
+
+  usuarioEstaAutenticado(){
+    return this.usuarioAutenticado;
+  }
+
 
 }
 

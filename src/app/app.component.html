@@ -1,12 +1,11 @@
-<nav *ngIf="mostrarMenu">
-
+<nav>
   <div class="nav-wrapper indigo darken-4">
     <a routerLink="" class="brand-logo left"><i class="large material-icons"
         style="margin-left: 15px;">next_week</i>Emprega<br></a>
     <ul id="nav-mobile" class="right">
-      <li routerLinkActive="active"><a routerLink="/cadastros" [queryParams]="{pagina:1}">Cadastros</a></li>
+      <li routerLinkActive="active"><a routerLink="/cadastros" [queryParams]="{pagina:1}" *ngIf="mostrarMenu">Cadastros</a></li>
       <!-- <li routerLinkActive="active"><a [routerLink]="['cadastro', idCadastro.value]">Cadastro por ID</a></li> -->
-      <li routerLinkActive="active"><a routerLink="/pessoas">Pessoas</a></li>
+      <li routerLinkActive="active"><a routerLink="/pessoas" *ngIf="mostrarMenu">Pessoas</a></li>
       <li routerLinkActive="active"><a routerLink="/login">Login</a></li>
     </ul>
   </div>
