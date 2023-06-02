@@ -9,6 +9,7 @@ import { CadastrosModule } from './cadastros/cadastros.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { AuthService } from './login/auth.service';
 import { FormsModule } from '@angular/forms';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { FormsModule } from '@angular/forms';
     PessoasModule,
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
