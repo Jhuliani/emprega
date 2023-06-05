@@ -6,6 +6,7 @@ import { CadastroNaoEncontradoComponent } from "./cadastro-nao-encontrado/cadast
 import { CadastrosService } from "./cadastros.service";
 import { CommonModule } from "@angular/common";
 import { CadastrosRoutingModule } from "./cadastros.routing.module";
+import { CadastroFormComponent } from './cadastro-form/cadastro-form.component';
 //import { RouterModule } from "@angular/router";
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CadastrosRoutingModule } from "./cadastros.routing.module";
   declarations: [
     CadastrosComponent,
     CadastroDetalheComponent,
-    CadastroNaoEncontradoComponent
+    CadastroNaoEncontradoComponent,
+    CadastroFormComponent
   ],
   providers: [CadastrosService],
 })

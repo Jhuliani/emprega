@@ -30,7 +30,7 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
         this.cadastro = this.cadastrosService.getCadastro(this.id);
 
         if (this.cadastro == null){
-          this.router.navigate(['/naoEncontrado']);
+          this.router.navigate(['cadastros/naoEncontrado']);
         }
     });
   }

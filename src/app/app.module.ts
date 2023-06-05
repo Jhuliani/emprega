@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { CadastrosModule } from './cadastros/cadastros.module';
+//import { CadastrosModule } from './cadastros/cadastros.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { AuthService } from './login/auth.service';
 import { FormsModule } from '@angular/forms';
@@ -21,7 +21,7 @@ import { AuthGuard } from './guards/auth.guard';
   imports: [
     BrowserModule,
     FormsModule,
-    CadastrosModule,
+    //CadastrosModule,
     PessoasModule,
     AppRoutingModule
   ],
