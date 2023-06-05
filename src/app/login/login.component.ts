@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 import { Usuario } from './usuario';
 import { AuthService } from './auth.service';
@@ -18,6 +18,10 @@ export class LoginComponent implements OnInit  {
 
   fazerLogin(){
     this.authService.fazerLogin(this.usuario);
+  }
+
+  @ Output() fazerLogout(){
+    this.authService.fazerLogout();
   }
 
   ngOnInit(){

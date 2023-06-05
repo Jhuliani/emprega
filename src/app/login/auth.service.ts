@@ -1,4 +1,4 @@
- import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Usuario } from './usuario';
 import { Router } from '@angular/router';
 
@@ -7,31 +7,38 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-   usuarioAutenticado: boolean = false;
+  usuarioAutenticado: boolean = false;
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
 
   constructor(private router: Router) { }
 
 
-  fazerLogin(usuario: Usuario){
+  fazerLogin(usuario: Usuario) {
     if (usuario.nome == 'usuario@gmail.com' &&
-    usuario.senha === '123456'){
+      usuario.senha === '123456') {
       this.usuarioAutenticado = true;
       this.mostrarMenuEmitter.emit(true);
       this.router.navigate(['/']);
 
-    }else{
+    } else {
       this.usuarioAutenticado = false;
       this.mostrarMenuEmitter.emit(false);
 
     }
   }
 
-  usuarioEstaAutenticado(){
+  usuarioEstaAutenticado() {
     return this.usuarioAutenticado;
   }
 
+  fazerLogout() {
+
+    this.usuarioAutenticado = false;
+    this.mostrarMenuEmitter.emit(false);
+
+
+  }
 
 }
 

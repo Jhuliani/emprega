@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 //import { CadastrosModule } from './cadastros/cadastros.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { AuthService } from './login/auth.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './guards/auth.guard';
 
 
@@ -23,6 +23,8 @@ import { AuthGuard } from './guards/auth.guard';
     FormsModule,
     //CadastrosModule,
     PessoasModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [AuthService, AuthGuard],

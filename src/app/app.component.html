@@ -2,14 +2,18 @@
   <div class="nav-wrapper indigo darken-4">
     <a routerLink="" class="brand-logo left"><i class="large material-icons"
         style="margin-left: 15px;">next_week</i>Emprega<br></a>
-    <ul id="nav-mobile" class="right">
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <ul id="nav-mobile" class="right ">
       <li routerLinkActive="active"><a routerLink="/cadastros" [queryParams]="{pagina:1}" *ngIf="mostrarMenu">Cadastros</a></li>
       <!-- <li routerLinkActive="active"><a [routerLink]="['cadastro', idCadastro.value]">Cadastro por ID</a></li> -->
       <li routerLinkActive="active"><a routerLink="/pessoas" *ngIf="mostrarMenu">Pessoas</a></li>
-      <li routerLinkActive="active"><a routerLink="/login">Login</a></li>
+      <li routerLinkActive="active"><a routerLink="/cadastros/novo" *ngIf="mostrarMenu">Cadastrar</a></li>
+      <li routerLinkActive="active"><a routerLink="/login" *ngIf="!mostrarMenu">Login</a></li>
+      <li><a routerLink="/login" *ngIf="mostrarMenu" (click)="logout()"><i class="material-icons">exit_to_app</i></a></li>
     </ul>
   </div>
 </nav>
+
 
 
 

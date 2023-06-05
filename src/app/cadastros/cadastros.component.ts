@@ -40,5 +40,8 @@ export class CadastrosComponent {
     {queryParams:  {'pagina': ++this.pagina}});
   }
 
+  novoCadastro(){
+    this.router.navigate(['cadastros/novo']);
+  }
 
 }

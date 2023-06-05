@@ -1,1 +1,37 @@
-<p>cadastro-form works!</p>
+<div class="row">
+  <form class="col s12" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+    <div class="row form-group" [ngClass]="aplicaCssErro('nome')">
+      <div class="input-field col s12">
+        <input  id="nome-completo" type="text" class="validate" name="nome" formControlName="nome">
+        <label for="nome-completo">Nome</label>
+      </div>
+      <div class="input-field col s6" [ngClass]="aplicaCssErr('nome')" msgErr="Email é obrigatorio">
+        <input  id="setor" type="text" class="validate" name="setor" formControlName="setor">
+        <label for="setor">Setor</label>
+      </div>
+      <div class="input-field col s16">
+        <input  id="nivel" type="text" class="validate" name="nivel" formControlName="nivel">
+        <label for="nivel">Nível</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="password" type="password" class="validate">
+        <label for="password">Senha</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" class="validate">
+        <label for="email" required email>Email</label>
+      </div>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action" >Submit
+      <i class="material-icons right">send</i>
+    </button>
+
+
+    <app-debug-form [form]="formulario"></app-debug-form>
+
+  </form>
+</div>

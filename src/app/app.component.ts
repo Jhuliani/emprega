@@ -15,6 +15,11 @@ export class AppComponent {
 
   }
 
+
+  logout(){
+    this.authService.fazerLogout();
+  }
+
   ngOnInit(){
 
     this.authService.mostrarMenuEmitter.subscribe(
