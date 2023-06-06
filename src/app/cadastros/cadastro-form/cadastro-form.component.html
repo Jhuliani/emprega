@@ -1,37 +1,94 @@
 <div class="row">
   <form class="col s12" [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <div class="row form-group" [ngClass]="aplicaCssErro('nome')">
+    <div class=" form-group">
+      <div formGroupName="cabecalho">
+        <div class="input-field col s7">
+          <input id="nome-completo" type="text" class="validate" name="nome" formControlName="nome">
+          <label for="nome-completo">Nome</label>
+        </div>
+        <div class="input-field col s3">
+          <select class="browser-default" formControlName="setor">
+            <option value="" disabled selected>Setor:</option>
+            <option value="1">Comercial</option>
+            <option value="1">Financeiro</option>
+            <option value="2">Jurídico</option>
+            <option value="3">RH</option>
+            <option value="4">TI</option>
+            <option value="5">Operações</option>
+          </select>
+        </div>
+        <div class="input-field col s2">
+          <select class="browser-default" formControlName="nivel">
+            <option value="" disabled selected>Nível:</option>
+            <option value="1">Trainee</option>
+            <option value="2">Júnior</option>
+            <option value="3">Pleno</option>
+            <option value="4">Senior</option>
+          </select>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="cidade" type="text" class="validate" formControlName="cidade">
+          <label for="cidade">Cidade</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="linkedin" type="text" class="validate" formControlName="linkedin">
+          <label for="linkedin">Linkedin</label>
+        </div>
+        <div class="input-field col s4">
+          <input type = "date" class = "datepicker" formControlName="nascimento" />
+          <label for="nascimento">Nascimento</label>
+        </div>
+        <div class="input-field col s4">
+          <input id="telefone" type="text" class="validate"  formControlName="telefone">
+          <label for="telefone">Telefone</label>
+        </div>
+
+        <div class="input-field col s12">
+          <input id="resumo" type="text" class="validate" formControlName="resumo">
+          <label for="resumo">Resumo</label>
+          <span class="helper-text" data-error="wrong" data-success="right">Aqui você pode escrever um breve resumo
+            sobre
+            você e suas habilidades.</span>
+        </div>
+
+      </div>
+
+
+      <div class="input-field col s12 ">
+        <h5>Experiência acadêmica:</h5>
+
+        <app-form-exp-acad></app-form-exp-acad>
+
+        <!-- <a class="btn-floating btn-small waves-effect waves-light red" (click)="adicinonarExpAcademica()"><i class="material-icons">add</i></a> -->
+      </div>
+
       <div class="input-field col s12">
-        <input  id="nome-completo" type="text" class="validate" name="nome" formControlName="nome">
-        <label for="nome-completo">Nome</label>
+        <h5>Experiência Profissional:</h5>
+        <app-form-exp-prof></app-form-exp-prof>
       </div>
-      <div class="input-field col s6" [ngClass]="aplicaCssErr('nome')" msgErr="Email é obrigatorio">
-        <input  id="setor" type="text" class="validate" name="setor" formControlName="setor">
-        <label for="setor">Setor</label>
-      </div>
-      <div class="input-field col s16">
-        <input  id="nivel" type="text" class="validate" name="nivel" formControlName="nivel">
-        <label for="nivel">Nível</label>
-      </div>
-    </div>
-    <div class="row">
+
       <div class="input-field col s12">
-        <input id="password" type="password" class="validate">
-        <label for="password">Senha</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="email" type="email" class="validate">
+        <input id="email" type="email" class="validate" formControlName="email">
         <label for="email" required email>Email</label>
       </div>
-    </div>
-    <button class="btn waves-effect waves-light" type="submit" name="action" >Submit
-      <i class="material-icons right">send</i>
-    </button>
 
+      <div class="input-field col s12">
+        <input id="password" type="password" class="validate" formControlName="senha">
+        <label for="password">Senha</label>
+      </div>
+
+      <button class="btn waves-effect waves-light col s12" type="submit" name="action">Cadastrar
+        <i class="material-icons right">send</i>
+      </button>
+      <button class="btn waves-effect waves-light col s12" (click)="resetar()">Cancelar
+        <i class="material-icons right">cancel</i>
+      </button>
+
+    </div>
 
     <app-debug-form [form]="formulario"></app-debug-form>
-
   </form>
+
+
 </div>

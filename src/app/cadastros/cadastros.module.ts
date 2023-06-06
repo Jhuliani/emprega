@@ -10,6 +10,8 @@ import { CadastroFormComponent } from './cadastro-form/cadastro-form.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/shared.module.ts/shared.module.ts.module";
 import { HttpClientModule } from "@angular/common/http";
+import { FormExpAcadComponent } from './cadastro-form/form-exp-acad/form-exp-acad/form-exp-acad.component';
+import { FormExpProfComponent } from './cadastro-form/form-exp-prof/form-exp-prof/form-exp-prof.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { HttpClientModule } from "@angular/common/http";
         CadastrosComponent,
         CadastroDetalheComponent,
         CadastroNaoEncontradoComponent,
-        CadastroFormComponent
+        CadastroFormComponent,
+        FormExpAcadComponent,
+        FormExpProfComponent
     ],
     providers: [CadastrosService],
     imports: [
