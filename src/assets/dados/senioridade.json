@@ -1,0 +1,55 @@
+[{
+	"id": "1",
+	"sigla": "TR1",
+	"nome": "Trainee 1"
+},
+     {
+	"id": "2",
+	"sigla": "TR2",
+	"nome": "Trainee 2"
+},
+     {
+	"id": "3",
+  "sigla": "TR3",
+	"nome": "Trainee 3"
+},
+     {
+	"id": "4",
+	"sigla": "JR1",
+	"nome": "Junior 1"
+},
+     {
+	"id": "5",
+	"sigla": "JR2",
+	"nome": "Junior 2"
+},
+     {
+	"id": "6",
+	"sigla": "JR3",
+	"nome": "Junior 3"
+},
+     {
+	"id": "7",
+	"sigla": "PL1",
+	"nome": "Pleno 1"
+},
+     {
+	"id": "8",
+	"sigla": "PL2",
+	"nome": "Pleno 2"
+},
+     {
+	"id": "9",
+	"sigla": "PL3",
+	"nome": "Pleno 3"
+},
+     {
+	"id": "10",
+	"sigla": "SR",
+	"nome": "Senior"
+},
+     {
+	"ID": "11",
+	"Sigla": "LT",
+	"Nome": "Lider Técnico"
+}]

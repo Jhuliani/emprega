@@ -4,7 +4,7 @@
 
 
 
-    <div class="collection ">
+    <div class="collection">
       <a class="collection-item" *ngFor="let cadastro of cadastros" [routerLink]="['/cadastros', cadastro.id]">
         {{ cadastro.nome }} <br>
         <span class="grey-text text-darken-4">{{cadastro.area}} <strong>{{cadastro.nivel}}</strong> </span>

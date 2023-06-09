@@ -8,10 +8,11 @@ import { CommonModule } from "@angular/common";
 import { CadastrosRoutingModule } from "./cadastros.routing.module";
 import { CadastroFormComponent } from './cadastro-form/cadastro-form.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { SharedModule } from "../shared/shared.module.ts/shared.module.ts.module";
 import { HttpClientModule } from "@angular/common/http";
 import { FormExpAcadComponent } from './cadastro-form/form-exp-acad/form-exp-acad/form-exp-acad.component';
 import { FormExpProfComponent } from './cadastro-form/form-exp-prof/form-exp-prof/form-exp-prof.component';
+import { SharedModule } from "../shared/shared.module";
+import { InputFieldComponent } from '../cadastro-form/input-field/input-field.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FormExpProfComponent } from './cadastro-form/form-exp-prof/form-exp-pro
         CadastroNaoEncontradoComponent,
         CadastroFormComponent,
         FormExpAcadComponent,
-        FormExpProfComponent
+        FormExpProfComponent,
+        InputFieldComponent
     ],
     providers: [CadastrosService],
     imports: [

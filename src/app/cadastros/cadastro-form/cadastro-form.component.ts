@@ -2,6 +2,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Departamentos } from 'src/app/shared/models/departamentos.model';
+import { DepartamentosService } from '../../shared/services/departamentos.service';
+import { Senioridade } from 'src/app/shared/models/senioridade.model';
+import { SenioridadeService } from '../../shared/services/senioridade.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -12,16 +17,35 @@ import { HttpClient } from '@angular/common/http';
 export class CadastroFormComponent implements OnInit {
 
   formulario!: FormGroup;
-  ExpProfissional: any[] = [];
+  // departamentos: Departamentos[] = [];
+  // niveis: Senioridade[] = [];
+  departamentos!: Observable<Departamentos[]>;
+  niveis!: Observable<Senioridade[]>;
+
+  experienciasAcademicas: any[] = [];
+
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private departamentosService: DepartamentosService,
+    private senioridadeService: SenioridadeService) {
 
   }
 
 
   ngOnInit() {
+
+    this.departamentos = this.departamentosService.getDepartamentos();
+    this.niveis =  this.senioridadeService.getSenioridade();
+
+    // this.departamentosService.getDepartamentos()
+    // .subscribe(dados =>{this.departamentos = dados});
+
+
+    // this.senioridadeService.getDepartamentos()
+    // .subscribe(dados =>{this.niveis = dados});
+
     /*
     this.formulario = new FormGroup({
       nome: new FormControl(null),
@@ -61,14 +85,16 @@ export class CadastroFormComponent implements OnInit {
     console.log(this.formulario.value);
 
     if (this.formulario) {
-        this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
-            .subscribe(
-                dados => {
-                    console.log(dados);
-                    this.formulario.reset();
-                },
-                (error: any) => alert('erro')
-            );
+      this.http.post('https://httpbin.org/post', JSON.stringify({}))
+        .subscribe({
+          next: dados => {
+            console.log(dados);
+            // this.formulario.reset();
+          },
+          error: error => {
+            alert('erro');
+          }
+        });
     }
 
     else {
@@ -81,14 +107,20 @@ export class CadastroFormComponent implements OnInit {
 
 
 
-
-
-
-
-
   resetar(){
     this.formulario.reset();
   }
+
+
+  adicinonarExpAcademica(){
+    this.experienciasAcademicas.push({});
+  }
+
+  excluirExpAcademica(){
+    this.experienciasAcademicas.pop();
+  }
+
+
 
 
 

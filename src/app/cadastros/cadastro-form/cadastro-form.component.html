@@ -7,23 +7,13 @@
           <label for="nome-completo">Nome</label>
         </div>
         <div class="input-field col s3">
-          <select class="browser-default" formControlName="setor">
-            <option value="" disabled selected>Setor:</option>
-            <option value="1">Comercial</option>
-            <option value="1">Financeiro</option>
-            <option value="2">Jurídico</option>
-            <option value="3">RH</option>
-            <option value="4">TI</option>
-            <option value="5">Operações</option>
+          <select class="browser-default" id="setor" formControlName="setor">
+            <option *ngFor="let dep of departamentos | async">{{ dep.nome }}</option>
           </select>
         </div>
         <div class="input-field col s2">
           <select class="browser-default" formControlName="nivel">
-            <option value="" disabled selected>Nível:</option>
-            <option value="1">Trainee</option>
-            <option value="2">Júnior</option>
-            <option value="3">Pleno</option>
-            <option value="4">Senior</option>
+            <option *ngFor="let nivel of niveis | async">{{ nivel.nome }}</option>
           </select>
         </div>
 
@@ -36,11 +26,11 @@
           <label for="linkedin">Linkedin</label>
         </div>
         <div class="input-field col s4">
-          <input type = "date" class = "datepicker" formControlName="nascimento" />
+          <input type="date" class="datepicker" formControlName="nascimento" />
           <label for="nascimento">Nascimento</label>
         </div>
         <div class="input-field col s4">
-          <input id="telefone" type="text" class="validate"  formControlName="telefone">
+          <input id="telefone" type="text" class="validate" formControlName="telefone">
           <label for="telefone">Telefone</label>
         </div>
 
@@ -58,9 +48,20 @@
       <div class="input-field col s12 ">
         <h5>Experiência acadêmica:</h5>
 
+        <a class="btn-floating btn-small waves-effect waves-light red " (click)="adicinonarExpAcademica()"><i
+            class="material-icons">add</i></a>
+        <a class="btn-floating btn-small waves-effect waves-light red" (click)="excluirExpAcademica()"><i
+              class="material-icons">delete</i></a>
+
+
+
         <app-form-exp-acad></app-form-exp-acad>
 
-        <!-- <a class="btn-floating btn-small waves-effect waves-light red" (click)="adicinonarExpAcademica()"><i class="material-icons">add</i></a> -->
+        <div id="comp-render" *ngFor="let expAcademica of experienciasAcademicas">
+          <app-form-exp-acad></app-form-exp-acad>
+        </div>
+
+
       </div>
 
       <div class="input-field col s12">
@@ -87,7 +88,7 @@
 
     </div>
 
-    <app-debug-form [form]="formulario"></app-debug-form>
+    <!-- <app-debug-form [form]="formulario"></app-debug-form> -->
   </form>
 
 

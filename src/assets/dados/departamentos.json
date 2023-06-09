@@ -1,0 +1,59 @@
+[{
+	"id": "1",
+	"sigla": "CM",
+	"nome": "Comercial"
+},
+     {
+	"id": "2",
+	"sigla": "RH",
+	"nome": "Recursos Humanos"
+},
+     {
+	"id": "3",
+	"sigla": "FN",
+	"nome": "Financeiro"
+},
+     {
+	"id": "4",
+	"sigla": "DP",
+	"nome": "Departamento Pessoal"
+},
+     {
+	"id": "5",
+	"sigla": "TI",
+	"nome": "Tecnologia da Informação"
+},
+     {
+	"id": "6",
+	"sigla": "ST",
+	"nome": "Suporte"
+},
+     {
+	"id": "7",
+	"sigla": "JD",
+	"nome": "Distrito Federal"
+},
+     {
+	"id": "8",
+	"sigla": "ES",
+	"nome": "Jurídico"
+},
+     {
+	"id": "9",
+	"sigla": "MP",
+	"nome": "Marketing e Propaganda"
+},
+     {
+	"id": "10",
+	"sigla": "OP",
+	"nome": "Operações"
+},
+     {
+	"ID": "11",
+	"Sigla": "RI",
+	"Nome": "Relações Internacionais"
+},
+      {
+
+
+}]
