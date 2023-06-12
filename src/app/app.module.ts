@@ -10,6 +10,7 @@ import { PessoasModule } from './pessoas/pessoas.module';
 import { AuthService } from './login/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './guards/auth.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { AuthGuard } from './guards/auth.guard';
     PessoasModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    HttpClientModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

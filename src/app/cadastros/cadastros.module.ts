@@ -11,8 +11,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { FormExpAcadComponent } from './cadastro-form/form-exp-acad/form-exp-acad/form-exp-acad.component';
 import { FormExpProfComponent } from './cadastro-form/form-exp-prof/form-exp-prof/form-exp-prof.component';
+import { VerificaEmailService } from "./cadastro-form/services/verifica-email.service";
 import { SharedModule } from "../shared/shared.module";
-import { InputFieldComponent } from '../cadastro-form/input-field/input-field.component';
 
 
 @NgModule({
@@ -23,10 +23,11 @@ import { InputFieldComponent } from '../cadastro-form/input-field/input-field.co
         CadastroNaoEncontradoComponent,
         CadastroFormComponent,
         FormExpAcadComponent,
-        FormExpProfComponent,
-        InputFieldComponent
+        FormExpProfComponent
+
     ],
-    providers: [CadastrosService],
+    providers: [CadastrosService,
+                VerificaEmailService],
     imports: [
         CommonModule,
         FormsModule,

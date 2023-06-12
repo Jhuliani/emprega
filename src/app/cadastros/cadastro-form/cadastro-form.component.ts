@@ -6,13 +6,15 @@ import { Departamentos } from 'src/app/shared/models/departamentos.model';
 import { DepartamentosService } from '../../shared/services/departamentos.service';
 import { Senioridade } from 'src/app/shared/models/senioridade.model';
 import { SenioridadeService } from '../../shared/services/senioridade.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { VerificaEmailService } from './services/verifica-email.service';
 
 
 @Component({
   selector: 'app-cadastro-form',
   templateUrl: './cadastro-form.component.html',
-  styleUrls: ['./cadastro-form.component.css']
+  styleUrls: ['./cadastro-form.component.css'],
+  preserveWhitespaces: true
 })
 export class CadastroFormComponent implements OnInit {
 
@@ -25,16 +27,20 @@ export class CadastroFormComponent implements OnInit {
   experienciasAcademicas: any[] = [];
 
 
+
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private departamentosService: DepartamentosService,
-    private senioridadeService: SenioridadeService) {
+    private senioridadeService: SenioridadeService,
+    private verificaEmailService: VerificaEmailService) {
 
   }
 
 
   ngOnInit() {
+
+   // this.verificaEmailService.verificarEmail('').subscribe();
 
     this.departamentos = this.departamentosService.getDepartamentos();
     this.niveis =  this.senioridadeService.getSenioridade();
@@ -71,7 +77,7 @@ export class CadastroFormComponent implements OnInit {
         telefone: [null, Validators.required],
         resumo: [null, Validators.required]
       }),
-      email: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.required, Validators.email], [this.validarEmail.bind(this)]],
       senha: [null, Validators.required]
     })
 
@@ -120,7 +126,10 @@ export class CadastroFormComponent implements OnInit {
     this.experienciasAcademicas.pop();
   }
 
-
+  validarEmail(formControl: FormControl){
+    return this.verificaEmailService.verificarEmail(formControl.value)
+      .pipe(map(emailExiste => emailExiste ? {emailInvalido: true} : null));
+  }
 
 
 

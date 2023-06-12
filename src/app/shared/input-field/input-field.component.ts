@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 
 @Component({
@@ -6,19 +6,16 @@ import { ControlValueAccessor } from '@angular/forms';
   templateUrl: './input-field.component.html',
   styleUrls: ['./input-field.component.css']
 })
-export class InputFieldComponent implements ControlValueAccessor{
+export class InputFieldComponent implements ControlValueAccessor {
 
 
   @Input() classeCss: any;
   @Input() id!: string;
   @Input() label!: string;
-  @Input()type = 'text';
+  @Input() type = 'text';
   @Input() control: any;
-  isReadOnly: boolean = false;
-  isDisableOnly: boolean = false;
 
   private innerValue: any;
-
   get value() {
     return this.innerValue;
   }
@@ -26,35 +23,30 @@ export class InputFieldComponent implements ControlValueAccessor{
   set value(v: any){
     if (v !== this.innerValue){
       this.innerValue = v;
-      //ToDo
+      this.OnChangeCb(v);
     }
   }
 
-  constructor( ){
+  constructor(){
+
   }
 
-  onChangeCb: (_: any) => void = () => {};
-  onTouchedCb: (_: any) => void = () => {};
+  OnChangeCb: (_:any) => void = () => {};
+  onTouchedCb: (_:any) => void = () => {};
 
-  writeValue( v: any): void {
-    if(v !== this.innerValue){
-      this.value = v;
-    }
+
+  writeValue(obj: any): void {
+    throw new Error('Method not implemented.');
   }
   registerOnChange(fn: any): void {
-    this.onChangeCb = fn;
+    throw new Error('Method not implemented.');
   }
   registerOnTouched(fn: any): void {
-    this.onTouchedCb = fn;
+    throw new Error('Method not implemented.');
   }
   setDisabledState?(isDisabled: boolean): void {
-    this.isReadOnly = this.isDisableOnly;
+    throw new Error('Method not implemented.');
   }
-
-  ngOnInit(){
-
-  }
-
 
 
 }

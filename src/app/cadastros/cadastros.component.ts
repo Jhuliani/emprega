@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CadastrosService } from './cadastros.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Cadastro } from './interfaces/cadastro';
 
 @Component({
   selector: 'app-cadastros',
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class CadastrosComponent {
 
-  cadastros: any[] = [];
+  cadastros: Cadastro[] = [];
   pagina!: number;
   inscricao!: Subscription;
 
@@ -20,7 +21,11 @@ export class CadastrosComponent {
     private router: Router) {}
 
   ngOnInit() {
-    this.cadastros = this.cadastrosService.getCadastros();
+
+    this.cadastrosService.list()
+    .subscribe(dados => this.cadastros = dados);
+
+    //this.cadastros = this.cadastrosService.getCadastros();
 
     this.inscricao = this.route.queryParams.subscribe(
       (queryParams: any) => {

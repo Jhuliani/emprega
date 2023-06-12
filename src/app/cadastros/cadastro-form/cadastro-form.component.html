@@ -1,16 +1,25 @@
 <div class="row">
   <form class="col s12" [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <div class=" form-group">
+
+
+    <div class="form-group">
       <div formGroupName="cabecalho">
+
+        <app-input-field class="input-field col s7"
+          [classeCss]=""
+          id="nome" label="Nome" [control]="formulario.get('nome')"></app-input-field>
+
         <div class="input-field col s7">
           <input id="nome-completo" type="text" class="validate" name="nome" formControlName="nome">
           <label for="nome-completo">Nome</label>
         </div>
+
         <div class="input-field col s3">
           <select class="browser-default" id="setor" formControlName="setor">
             <option *ngFor="let dep of departamentos | async">{{ dep.nome }}</option>
           </select>
         </div>
+
         <div class="input-field col s2">
           <select class="browser-default" formControlName="nivel">
             <option *ngFor="let nivel of niveis | async">{{ nivel.nome }}</option>
@@ -21,14 +30,17 @@
           <input id="cidade" type="text" class="validate" formControlName="cidade">
           <label for="cidade">Cidade</label>
         </div>
+
         <div class="input-field col s6">
           <input id="linkedin" type="text" class="validate" formControlName="linkedin">
           <label for="linkedin">Linkedin</label>
         </div>
+
         <div class="input-field col s4">
           <input type="date" class="datepicker" formControlName="nascimento" />
           <label for="nascimento">Nascimento</label>
         </div>
+
         <div class="input-field col s4">
           <input id="telefone" type="text" class="validate" formControlName="telefone">
           <label for="telefone">Telefone</label>
@@ -50,6 +62,7 @@
 
         <a class="btn-floating btn-small waves-effect waves-light red " (click)="adicinonarExpAcademica()"><i
             class="material-icons">add</i></a>
+
         <a class="btn-floating btn-small waves-effect waves-light red" (click)="excluirExpAcademica()"><i
               class="material-icons">delete</i></a>
 
