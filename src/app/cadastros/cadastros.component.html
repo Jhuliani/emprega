@@ -4,13 +4,28 @@
 
 
 
-    <div class="collection">
+    <div class="collection" *ngIf="cadastros$ | async as cadastros; else loading">
+
       <a class="collection-item" *ngFor="let cadastro of cadastros" [routerLink]="['/cadastros', cadastro.id]">
         {{ cadastro.nome }} <br>
         <span class="grey-text text-darken-4">{{cadastro.setor}} <strong>{{cadastro.senioridade}}</strong> </span>
 
       </a>
     </div>
+
+    <ng-template #loading>
+      <div *ngIf="error$ | async; else loadingNoError">
+        Erro ao carregar cadastros.
+      </div>
+      <ng-template #loadingNoError>
+        <span>
+          <div class="progress">
+            <div class="indeterminate"></div>
+          </div>
+        </span>
+      </ng-template>
+
+    </ng-template>
 
 
     <p>Página: {{ pagina }}</p>

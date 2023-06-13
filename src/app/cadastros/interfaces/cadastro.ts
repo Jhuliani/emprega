@@ -1,5 +1,6 @@
-import { ExpAcademica } from "./exp-acad";
-import { ExpProfissional } from "./exp-prof";
+import { ExperienciaAcad } from "./experienciaAcad";
+import { ExperienciaProf } from "./experienciaProf";
+
 
 export interface Cadastro {
   id: number;
@@ -11,8 +12,8 @@ export interface Cadastro {
   nascimento: Date;
   telefone: string;
   resumo: string;
-  experienciaAcad: ExpAcademica[];
-  experienciaProf: ExpProfissional[];
+  experienciaAcad: ExperienciaAcad[];
+  experienciaProf: ExperienciaProf[];
   email: string;
   senha: string;
 

@@ -1,4 +1,4 @@
-export interface ExpAcademica {
+export interface ExperienciaAcad {
   nomeCurso: string;
   dataInicio: Date;
   dataFim: Date;

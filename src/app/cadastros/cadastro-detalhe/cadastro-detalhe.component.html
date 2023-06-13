@@ -1,4 +1,4 @@
-<p>Id: {{id}}</p>
+<!-- <p>Id: {{id}}</p>
 <h4>{{ cadastro?.nome }}</h4>
 
 <div >
@@ -19,18 +19,79 @@
 </div>
 
 <div class="section">
-  <h5 class="section-title">Experiências Pessoais</h5>
+  <h5 class="section-title">Experiências Profissional</h5>
+
+
+  <ng-container *ngIf="experienciasProfissionais$ | async as experiencias">
+        <app-detalhe-form-exp-prof
+          *ngFor="let experiencia of experiencias"
+          [experienciaProfissional]="experiencia"
+        ></app-detalhe-form-exp-prof>
+      </ng-container>
+
+
+
+  <div id="comp-render" *ngFor="let expAProf of cadastro.">
+    <app-form-exp-acad></app-form-exp-acad>
+  </div>
+
   <div class="section-content">
-    <div class="experience">
-      <h6 class="subsection-title">Cargo </h6>
+    <app-detalhe-exp-acad></app-detalhe-exp-acad>
+  </div>
+</div>
+
+<div class="section">
+  <h5 class="section-title">Formação</h5>
+  <div class="section-content">
+    <div class="education">
+      <h6 class="subsection-title">Nome do Curso</h6>
       <p class="subsection-content">
-        <div class="dates">
-          <span class="date"><strong>Data de Início:</strong> MM/AAAA</span>
-          <span class="date"><strong>Data de Fim:</strong> MM/AAAA</span>
-        </div>
-        <strong>Empresa:</strong> Nome da Empresa
-      <p>
+        <strong>Data de Início:</strong> MM/AAAA<br>
+        <strong>Data de Término:</strong> MM/AAAA<br>
+        <strong>Escola:</strong> Nome da Escola
+      </p>
     </div>
+  </div>
+</div>
+<button> Atualizar</button>
+<button> Excluir</button> -->
+
+<p>Id: {{id}}</p>
+<h4>{{ cadastro?.nome }}</h4>
+
+<div>
+  <div>
+    <p><strong>Telefone:</strong> (99) 99999-9999</p>
+    <p><strong>Cidade:</strong> Sua Cidade</p>
+    <p><strong>Data de Nascimento:</strong> DD/MM/AAAA</p>
+    <p><strong>Email:</strong> seuemail@example.com</p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/seuperfil">linkedin.com/seuperfil</a></p>
+  </div>
+</div>
+
+<div class="section">
+  <h5 class="section-title">Resumo</h5>
+  <div class="section-content">
+    <p>Aqui você pode escrever um breve resumo sobre você e suas habilidades.</p>
+  </div>
+</div>
+
+<div class="section">
+  <h5 class="section-title">Experiências Profissionais</h5>
+
+  <ng-container *ngIf="experienciasProfissionais$ | async as experiencias">
+    <app-detalhe-exp-prof
+      *ngFor="let experiencia of experiencias"
+      [expProfissional]="experiencia"
+    ></app-detalhe-exp-prof>
+  </ng-container>
+
+  <div id="comp-render" *ngFor="let expAProf of cadastro?.experienciasProfissionais">
+    <app-form-exp-acad></app-form-exp-acad>
+  </div>
+
+  <div class="section-content">
+    <app-detalhe-exp-acad></app-detalhe-exp-acad>
   </div>
 </div>
 
@@ -49,6 +110,3 @@
 </div>
 <button> Atualizar</button>
 <button> Excluir</button>
-
-
-

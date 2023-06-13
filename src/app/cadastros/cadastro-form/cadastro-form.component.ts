@@ -26,6 +26,7 @@ export class CadastroFormComponent implements OnInit {
 
   experienciasAcademicas: any[] = [];
 
+  experienciasProfissinais: any[] = [];
 
 
   constructor(
@@ -91,7 +92,7 @@ export class CadastroFormComponent implements OnInit {
     console.log(this.formulario.value);
 
     if (this.formulario) {
-      this.http.post('https://httpbin.org/post', JSON.stringify({}))
+      this.http.post('http://localhost:3000/cadastros', JSON.stringify({}))
         .subscribe({
           next: dados => {
             console.log(dados);
@@ -132,6 +133,13 @@ export class CadastroFormComponent implements OnInit {
   }
 
 
+  adicinonarExpProf(){
+    this.experienciasProfissinais.push({});
+  }
+
+  excluirExpProf(){
+    this.experienciasProfissinais.pop();
+  }
 
 }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CadastrosService } from './cadastros.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { EMPTY, Observable, Subject, Subscription, catchError, empty } from 'rxjs';
 import { Cadastro } from './interfaces/cadastro';
 
 @Component({
@@ -11,7 +11,11 @@ import { Cadastro } from './interfaces/cadastro';
 })
 export class CadastrosComponent {
 
-  cadastros: Cadastro[] = [];
+  //cadastros: Cadastro[] = [];
+
+  cadastros$!: Observable<Cadastro[]>;
+  error$ = new Subject<boolean>();
+
   pagina!: number;
   inscricao!: Subscription;
 
@@ -22,8 +26,16 @@ export class CadastrosComponent {
 
   ngOnInit() {
 
-    this.cadastrosService.list()
-    .subscribe(dados => this.cadastros = dados);
+    this.cadastros$ = this.cadastrosService.list()
+    .pipe(
+      catchError(error => {
+        console.error(error);
+        this.error$.next(true);
+        return EMPTY;
+      })
+    );
+    //this.cadastrosService.list()
+    //.subscribe(dados => this.cadastros = dados);
 
     //this.cadastros = this.cadastrosService.getCadastros();
 

@@ -13,6 +13,8 @@ import { FormExpAcadComponent } from './cadastro-form/form-exp-acad/form-exp-aca
 import { FormExpProfComponent } from './cadastro-form/form-exp-prof/form-exp-prof/form-exp-prof.component';
 import { VerificaEmailService } from "./cadastro-form/services/verifica-email.service";
 import { SharedModule } from "../shared/shared.module";
+import { DetalheExpProfComponent } from './cadastro-detalhe/detalhe-exp-prof/detalhe-exp-prof.component';
+import { DetalheExpAcadComponent } from './cadastro-detalhe/detalhe-exp-acad/detalhe-exp-acad.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { SharedModule } from "../shared/shared.module";
         CadastroNaoEncontradoComponent,
         CadastroFormComponent,
         FormExpAcadComponent,
-        FormExpProfComponent
+        FormExpProfComponent,
+        DetalheExpProfComponent,
+        DetalheExpAcadComponent
 
     ],
     providers: [CadastrosService,

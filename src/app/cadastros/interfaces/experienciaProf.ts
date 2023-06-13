@@ -1,4 +1,4 @@
-export interface ExpProfissional {
+export interface ExperienciaProf {
   nomeCargo: string;
   dataInicio: Date;
   dataFim: Date;
