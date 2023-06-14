@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { CadastrosService } from '../cadastros.service';
 import { Cadastro } from '../interfaces/cadastro';
+import { ExperienciaProf } from '../interfaces/experienciaProf';
 
 
 @Component({
@@ -49,7 +50,8 @@ import { Cadastro } from '../interfaces/cadastro';
 export class CadastroDetalheComponent implements OnInit, OnDestroy {
   id!: number;
   cadastro!: Cadastro | null;
-  experienciasProfissionais$!: Observable<ExperienciaProf[]>;
+ // experienciasProfissionais$!: Observable<ExperienciaProf[]>;
+  experienciasProfissionais!: ExperienciaProf[] | undefined;
   inscricao: Subscription = new Subscription();
 
   constructor(
@@ -65,15 +67,18 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
       this.cadastrosService.getById(this.id).subscribe({
         next: (cadastro: Cadastro | null) => {
           this.cadastro = cadastro;
+          this.experienciasProfissionais = cadastro?.experienciaProf;
+
           console.log(this.cadastro);
         },
         error: (error: any) => {
           this.router.navigate(['cadastros/naoEncontrado']);
         }
       });
-    });
 
-    this.experienciasProfissionais$ = this.cadastrosService.getExperienciasProfissionais(this.id);
+
+
+    });
   }
 
   ngOnDestroy() {

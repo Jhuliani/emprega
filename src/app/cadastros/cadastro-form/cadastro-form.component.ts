@@ -19,8 +19,7 @@ import { VerificaEmailService } from './services/verifica-email.service';
 export class CadastroFormComponent implements OnInit {
 
   formulario!: FormGroup;
-  // departamentos: Departamentos[] = [];
-  // niveis: Senioridade[] = [];
+
   departamentos!: Observable<Departamentos[]>;
   niveis!: Observable<Senioridade[]>;
 
@@ -41,30 +40,11 @@ export class CadastroFormComponent implements OnInit {
 
   ngOnInit() {
 
-   // this.verificaEmailService.verificarEmail('').subscribe();
 
     this.departamentos = this.departamentosService.getDepartamentos();
     this.niveis =  this.senioridadeService.getSenioridade();
 
-    // this.departamentosService.getDepartamentos()
-    // .subscribe(dados =>{this.departamentos = dados});
 
-
-    // this.senioridadeService.getDepartamentos()
-    // .subscribe(dados =>{this.niveis = dados});
-
-    /*
-    this.formulario = new FormGroup({
-      nome: new FormControl(null),
-      setor: new FormControl(null),
-      nivel: new FormControl(null),
-      cidade: new FormControl(null),
-      linkedin: new FormControl(null),
-      nascimento: new FormControl(null),
-      telefone: new FormControl(null),
-      resumo: new FormControl(null),
-      email: new FormControl(null),
-      usuario: new FormControl(null),*/
 
     this.formulario = this.formBuilder.group({
 
@@ -96,7 +76,6 @@ export class CadastroFormComponent implements OnInit {
         .subscribe({
           next: dados => {
             console.log(dados);
-            // this.formulario.reset();
           },
           error: error => {
             alert('erro');
@@ -106,9 +85,7 @@ export class CadastroFormComponent implements OnInit {
 
     else {
         console.log('formulario invalido');
-      /*  Object.keys(this.formulario.controls).forEach(campo => {
-            console.log(campo)
-        });*/
+
     }
 }
 

@@ -79,21 +79,21 @@
 <div class="section">
   <h5 class="section-title">Experiências Profissionais</h5>
 
-  <ng-container *ngIf="experienciasProfissionais$ | async as experiencias">
+  <ng-container *ngIf="experienciasProfissionais">
     <app-detalhe-exp-prof
-      *ngFor="let experiencia of experiencias"
+      *ngFor="let experiencia of experienciasProfissionais"
       [expProfissional]="experiencia"
     ></app-detalhe-exp-prof>
   </ng-container>
 
-  <div id="comp-render" *ngFor="let expAProf of cadastro?.experienciasProfissionais">
+  <!-- <div id="comp-render" *ngFor="let expAProf of cadastro?.experienciasProfissionais">
     <app-form-exp-acad></app-form-exp-acad>
-  </div>
+  </div> -->
 
-  <div class="section-content">
+  <!-- <div class="section-content">
     <app-detalhe-exp-acad></app-detalhe-exp-acad>
   </div>
-</div>
+</div> -->
 
 <div class="section">
   <h5 class="section-title">Formação</h5>
