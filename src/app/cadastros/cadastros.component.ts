@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CadastrosService } from './cadastros.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Observable, Subject, Subscription, catchError, empty } from 'rxjs';
+import { EMPTY, Observable, Subject, Subscription, catchError } from 'rxjs';
 import { Cadastro } from './interfaces/cadastro';
 
 @Component({
@@ -10,9 +10,6 @@ import { Cadastro } from './interfaces/cadastro';
   styleUrls: ['./cadastros.component.css']
 })
 export class CadastrosComponent {
-
-  //cadastros: Cadastro[] = [];
-
   cadastros$!: Observable<Cadastro[]>;
   error$ = new Subject<boolean>();
 
@@ -34,10 +31,6 @@ export class CadastrosComponent {
         return EMPTY;
       })
     );
-    //this.cadastrosService.list()
-    //.subscribe(dados => this.cadastros = dados);
-
-    //this.cadastros = this.cadastrosService.getCadastros();
 
     this.inscricao = this.route.queryParams.subscribe(
       (queryParams: any) => {

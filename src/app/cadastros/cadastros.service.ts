@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Cadastro } from './interfaces/cadastro';
 import { Observable, tap } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { ExperienciaProf } from './interfaces/experienciaProf';
 
 
 @Injectable({
@@ -32,20 +31,7 @@ export class CadastrosService {
     );
   }
 
-  getExpProf(id: number): Observable<ExperienciaProf[]> {
-    return new Observable<ExperienciaProf[]>((observer) => {
-      this.getById(id).subscribe((result) => {
-        let cadastro = result;
-        if (cadastro) {
-          const experienciasProfissionais = cadastro.experienciaProf;
-          observer.next(experienciasProfissionais);
-          observer.complete();
-        } else {
-          observer.error('Cadastro não encontrado');
-        }
-      });
-    });
-  }
+
 
 }
 

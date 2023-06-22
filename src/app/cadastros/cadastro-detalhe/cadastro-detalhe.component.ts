@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { CadastrosService } from '../cadastros.service';
 import { Cadastro } from '../interfaces/cadastro';
-import { ExperienciaProf } from '../interfaces/experienciaProf';
 
 
 @Component({
@@ -50,8 +49,7 @@ import { ExperienciaProf } from '../interfaces/experienciaProf';
 export class CadastroDetalheComponent implements OnInit, OnDestroy {
   id!: number;
   cadastro!: Cadastro | null;
- // experienciasProfissionais$!: Observable<ExperienciaProf[]>;
-  experienciasProfissionais!: ExperienciaProf[] | undefined;
+  experienciasProfissionais!: ExperienciaProfissional[] | undefined;
   inscricao: Subscription = new Subscription();
 
   constructor(
@@ -65,7 +63,7 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
       this.id = params['id'];
 
       this.cadastrosService.getById(this.id).subscribe({
-        next: (cadastro: Cadastro | null) => {
+        next: (cadastro: Cadastro |null) => {
           this.cadastro = cadastro;
           this.experienciasProfissionais = cadastro?.experienciaProf;
 
@@ -86,4 +84,14 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
       this.inscricao.unsubscribe();
     }
   }
+}
+
+
+
+
+interface ExperienciaProfissional {
+  nomeCargo: string;
+  dataInicio: Date;
+  dataFim: Date;
+  nomeEmpresa: string;
 }
