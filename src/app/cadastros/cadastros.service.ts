@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Cadastro } from './interfaces/cadastro';
+import { Curriculo } from './interfaces/curriculo';
 import { Observable, tap } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
+import { ExperienciaProfissional } from './interfaces/experienciaProfissional';
 
 
 @Injectable({
@@ -10,27 +11,33 @@ import { delay, map } from 'rxjs/operators';
 })
 export class CadastrosService {
 
-  private readonly API = 'http://localhost:3000/cadastros';
+  private readonly API = 'http://localhost:3000/curriculums';
 
 
   constructor(private http: HttpClient) { }
 
 
 
-  list(): Observable<Cadastro[]> {
-    return this.http.get<Cadastro[]>(this.API)
+  list(): Observable<Curriculo[]> {
+    return this.http.get<Curriculo[]>(this.API)
     .pipe(
       delay(500),
       tap(data => console.log('Dados da API:', data))
     );
   }
 
-  getById(id: number): Observable<Cadastro | null> {
+  getById(id: string): Observable<Curriculo | null> {
     return this.list().pipe(
-      map(cadastros => cadastros.find(cadastro => cadastro.id === id) || null)
+      map(cadastros => cadastros.find(cadastro => cadastro._id === id) || null)
     );
   }
 
+  getExpProfById(id: string): Observable<ExperienciaProfissional[]> {
+    return this.getById(id).pipe(
+      map(curriculo => curriculo ? curriculo.experienciaProfissional : [])
+    );
+
+  }
 
 
 }

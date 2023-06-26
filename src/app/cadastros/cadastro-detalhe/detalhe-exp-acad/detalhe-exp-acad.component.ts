@@ -1,8 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CadastrosService } from '../../cadastros.service';
-import { Subscription } from 'rxjs';
-import { Cadastro } from '../../interfaces/cadastro';
+import { ExperienciaAcademica } from '../../interfaces/experienciaAcademica';
 
 @Component({
   selector: 'app-detalhe-exp-acad',
@@ -11,8 +8,6 @@ import { Cadastro } from '../../interfaces/cadastro';
 })
 export class DetalheExpAcadComponent {
 
-  @Input() expAcademica!: String[];
-
-
+  @Input() expAcademica!: ExperienciaAcademica;
 
 }

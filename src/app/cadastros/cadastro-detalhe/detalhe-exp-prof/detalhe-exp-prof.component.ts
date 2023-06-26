@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ExperienciaProfissional } from '../../interfaces/experienciaProfissional';
 
 @Component({
   selector: 'app-detalhe-exp-prof',
@@ -8,5 +9,5 @@ import { Component, Input } from '@angular/core';
 export class DetalheExpProfComponent {
 
 
-  @Input() expProfissional!: [];
+  @Input() expProfissional!: ExperienciaProfissional;
 }

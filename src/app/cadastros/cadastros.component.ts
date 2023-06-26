@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CadastrosService } from './cadastros.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, Subject, Subscription, catchError } from 'rxjs';
-import { Cadastro } from './interfaces/cadastro';
+import { Curriculo } from './interfaces/curriculo';
 
 @Component({
   selector: 'app-cadastros',
@@ -10,7 +10,7 @@ import { Cadastro } from './interfaces/cadastro';
   styleUrls: ['./cadastros.component.css']
 })
 export class CadastrosComponent {
-  cadastros$!: Observable<Cadastro[]>;
+  cadastros$!: Observable<Curriculo[]>;
   error$ = new Subject<boolean>();
 
   pagina!: number;
