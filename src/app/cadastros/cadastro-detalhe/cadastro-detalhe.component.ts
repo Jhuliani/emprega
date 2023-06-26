@@ -26,29 +26,32 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.inscricao = this.route.params.subscribe((params: any) => {
-      this.id = params['id'];
+    this.inscricao = this.route.params.subscribe({
+      next: (params: any) => {
+        this.id = params['id'];
 
-      this.cadastrosService.getById(this.id).subscribe(
-        (curriculo: Curriculo | null) => {
-          this.curriculo = curriculo;
+        this.cadastrosService.getById(this.id).subscribe({
+          next: (curriculo: Curriculo | null) => {
+            this.curriculo = curriculo;
 
-          if (curriculo) {
-            this.experienciasProfissionais = curriculo.experienciaProfissional;
-            this.experienciasAcademicas = curriculo.experienciaAcademica;
-          } else {
-            this.experienciasProfissionais = [];
-            this.experienciasAcademicas = [];
+            if (curriculo) {
+              this.experienciasProfissionais = curriculo.experienciaProfissional;
+              this.experienciasAcademicas = curriculo.experienciaAcademica;
+            } else {
+              this.experienciasProfissionais = [];
+              this.experienciasAcademicas = [];
+            }
+
+            console.log(this.experienciasProfissionais);
+            console.log(this.experienciasAcademicas);
+          },
+          error: (error: any) => {
+            this.router.navigate(['cadastros/naoEncontrado']);
           }
-
-          console.log(this.experienciasProfissionais);
-          console.log(this.experienciasAcademicas);
-        },
-        (error: any) => {
-          this.router.navigate(['cadastros/naoEncontrado']);
-        }
-      );
+        });
+      }
     });
+
   }
 
 

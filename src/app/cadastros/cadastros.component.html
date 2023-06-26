@@ -2,8 +2,6 @@
   <div class="col s12">
     <p>Lista de Cadastros:</p>
 
-
-
     <div class="collection" *ngIf="cadastros$ | async as cadastros; else loading">
 
       <a class="collection-item" *ngFor="let cadastro of cadastros" [routerLink]="['/cadastros', cadastro._id]">

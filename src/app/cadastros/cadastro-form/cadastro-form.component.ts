@@ -8,6 +8,7 @@ import { Senioridade } from 'src/app/shared/models/senioridade.model';
 import { SenioridadeService } from '../../shared/services/senioridade.service';
 import { Observable, map } from 'rxjs';
 import { VerificaEmailService } from './services/verifica-email.service';
+import { CadastrosService } from '../cadastros.service';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class CadastroFormComponent implements OnInit {
     private http: HttpClient,
     private departamentosService: DepartamentosService,
     private senioridadeService: SenioridadeService,
-    private verificaEmailService: VerificaEmailService) {
+    private verificaEmailService: VerificaEmailService,
+    private cadastroService: CadastrosService) {
 
   }
 
@@ -58,8 +60,8 @@ export class CadastroFormComponent implements OnInit {
         telefone: [null, Validators.required],
         resumo: [null, Validators.required]
       }),
-      email: [null, [Validators.required, Validators.email], [this.validarEmail.bind(this)]],
-      senha: [null, Validators.required]
+      // email: [null, [Validators.required, Validators.email], [this.validarEmail.bind(this)]],
+      // senha: [null, Validators.required]
     })
 
 
@@ -72,7 +74,7 @@ export class CadastroFormComponent implements OnInit {
     console.log(this.formulario.value);
 
     if (this.formulario) {
-      this.http.post('http://localhost:3000/cadastros', JSON.stringify({}))
+      this.http.post('http://localhost:3000/curriculums', JSON.stringify({}))
         .subscribe({
           next: dados => {
             console.log(dados);

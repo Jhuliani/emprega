@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Curriculo } from './interfaces/curriculo';
 import { Observable, tap } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { delay, map, take } from 'rxjs/operators';
 import { ExperienciaProfissional } from './interfaces/experienciaProfissional';
 
 
@@ -39,6 +39,9 @@ export class CadastrosService {
 
   }
 
+  create(cadastro: Curriculo) {
+    return this.http.post(this.API, cadastro).pipe(take(1));
+  }
 
 }
 
