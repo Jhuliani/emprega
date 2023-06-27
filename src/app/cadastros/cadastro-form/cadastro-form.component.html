@@ -1,15 +1,12 @@
- <div class="row">
-  <form class="col s12" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+<div class="row">
+  <form class="col s12" [formGroup]="formulario">
 
 
     <div class="form-group">
       <div formGroupName="cabecalho">
 
-        <app-input-field class="input-field col s7" id="nome" label="Nome" [control]="formulario.get('nome')">
-
+        <app-input-field class="input-field col s7" id="nome" label="Nome" [control]="formulario.get('cabecalho.nome')">
         </app-input-field>
-
-
 
         <div class="input-field col s3">
           <select class="browser-default" id="setor" formControlName="setor">
@@ -17,21 +14,17 @@
           </select>
         </div>
 
-        <div class="input-field col s2 " >
-          <select class="browser-default" formControlName="nivel">
+        <div class="input-field col s2 ">
+          <select class="browser-default" formControlName="senioridade">
             <option *ngFor="let nivel of niveis | async">{{ nivel.nome }}</option>
           </select>
         </div>
 
         <app-input-field class="input-field col s6" id="cidade" label="Cidade" [control]="formulario.get('cidade')">
-
         </app-input-field>
-
-
 
         <app-input-field class="input-field col s6" id="linkedin" label="Linkedin"
           [control]="formulario.get('linkedin')">
-
         </app-input-field>
 
         <div class="input-field col s4">
@@ -41,13 +34,10 @@
 
         <app-input-field class="input-field col s4" id="telefone" label="Telefone"
           [control]="formulario.get('telefone')">
-
         </app-input-field>
-
 
         <div class="input-field col s12">
           <app-input-field id="resumo" label="Resumo" [control]="formulario.get('resumo')">
-
           </app-input-field>
           <span class="helper-text" data-error="wrong" data-success="right">Aqui você pode escrever um breve resumo
             sobre
@@ -55,12 +45,15 @@
           </span>
         </div>
 
-
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate" formControlName="email">
+          <label for="email" required email>Email</label>
+        </div>
 
       </div>
 
 
-      <div class="input-field col s12 ">
+      <div class="input-field col s12 " formArrayName="formacao">
         <h5>Experiência acadêmica:</h5>
 
         <a class="btn-floating btn-small waves-effect waves-light red " (click)="adicinonarExpAcademica()"><i
@@ -70,17 +63,15 @@
             class="material-icons">delete</i></a>
 
 
-
-        <app-form-exp-acad></app-form-exp-acad>
-
-        <div id="comp-render" *ngFor="let expAcademica of experienciasAcademicas">
-          <app-form-exp-acad></app-form-exp-acad>
-        </div>
+        <ng-container *ngIf="formulario.get('formacao')">
+          <app-form-exp-acad *ngFor="let expAcademica of formulario.get('formacao')?.value"
+            [formGroup]="expAcademica"></app-form-exp-acad>
+        </ng-container>
 
 
       </div>
 
-      <div class="input-field col s12">
+      <div class="input-field col s12" formGroupName="experienciaProf">
         <h5>Experiência Profissional:</h5>
 
         <a class="btn-floating btn-small waves-effect waves-light red " (click)="adicinonarExpProf()"><i
@@ -90,25 +81,15 @@
             class="material-icons">delete</i></a>
 
 
-        <app-form-exp-prof></app-form-exp-prof>
-
-        <div id="comp-render" *ngFor="let expProf of experienciasProfissinais">
-          <app-form-exp-prof></app-form-exp-prof>
-        </div>
+        <ng-container *ngIf="formulario.get('experienciaProf')">
+          <app-form-exp-prof *ngFor="let expProfissional of formulario.get('experienciaProf')?.value"
+            [formGroup]="expProfissional"></app-form-exp-prof>
+        </ng-container>
 
       </div>
 
-      <div class="input-field col s12">
-        <input id="email" type="email" class="validate" formControlName="email">
-        <label for="email" required email>Email</label>
-      </div>
 
-      <div class="input-field col s12">
-        <input id="password" type="password" class="validate" formControlName="senha">
-        <label for="password">Senha</label>
-      </div>
-
-      <button class="btn waves-effect waves-light col s4" type="submit" name="action">Cadastrar
+      <button class="btn waves-effect waves-light col s4" type="submit" (click)="onSubmit()">Cadastrar
         <i class="material-icons right">send</i>
       </button>
 
@@ -122,5 +103,3 @@
 
 
 </div>
-
-
