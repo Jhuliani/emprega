@@ -26,6 +26,11 @@ export class CadastrosService {
     );
   }
 
+
+  loadById(id: any){
+    return this.http.get(`${this.API}/${id}`).pipe(take(1));
+  }
+
   getById(id: string): Observable<Curriculo | null> {
     return this.list().pipe(
       map(cadastros => cadastros.find(cadastro => cadastro._id === id) || null)

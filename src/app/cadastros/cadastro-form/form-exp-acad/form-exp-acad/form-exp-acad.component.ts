@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-exp-acad',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./form-exp-acad.component.css']
 })
 export class FormExpAcadComponent {
+  @Input() formGroup!: FormGroup;
 
 }

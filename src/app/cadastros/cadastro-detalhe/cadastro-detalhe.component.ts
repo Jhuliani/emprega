@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CadastrosService } from '../cadastros.service';
@@ -17,6 +17,8 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
   experienciasProfissionais: ExperienciaProfissional[] = [];
   experienciasAcademicas: ExperienciaAcademica[] = [];
   inscricao: Subscription = new Subscription();
+  @ViewChild('deleteModal', { static: true }) deleteModal: any;
+  curriculoSelecionado!: Curriculo;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +28,10 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+
+
+
+
     this.inscricao = this.route.params.subscribe({
       next: (params: any) => {
         this.id = params['id'];
@@ -54,8 +60,23 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
 
   }
 
+  onEdit(_id: any){
+    this.router.navigate(['editar', _id], { relativeTo: this.route});
+  }
+
+  onDelete(curriculo: any) {
+    this.curriculoSelecionado = curriculo;
+
+  }
+
+  // onConfirmDelete() {
+  //   this.cadastrosService.delete(this.curriculoSelecionado.id)
+
+  // }
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();
   }
+
+
 }
