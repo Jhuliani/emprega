@@ -17,6 +17,7 @@ import { DetalheExpProfComponent } from './cadastro-detalhe/detalhe-exp-prof/det
 import { DetalheExpAcadComponent } from './cadastro-detalhe/detalhe-exp-acad/detalhe-exp-acad.component';
 
 
+
 @NgModule({
     exports: [],
     declarations: [
@@ -33,6 +34,7 @@ import { DetalheExpAcadComponent } from './cadastro-detalhe/detalhe-exp-acad/det
     providers: [CadastrosService,
                 VerificaEmailService],
     imports: [
+        SharedModule,
         CommonModule,
         FormsModule,
         CadastrosRoutingModule,

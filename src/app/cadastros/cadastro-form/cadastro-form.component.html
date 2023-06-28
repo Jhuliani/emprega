@@ -1,30 +1,28 @@
 <div class="row">
-  <form class="col s12" [formGroup]="formulario">
+  <form class="col s12" [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
 
     <div class="form-group">
       <div formGroupName="cabecalho">
 
-        <app-input-field class="input-field col s7" id="nome" label="Nome" [control]="formulario.get('cabecalho.nome')">
+        <app-input-field class="input-field col s7" id="nome" label="Nome" [control]="formulario.get('cabecalho.nome')"
+          formControlName="nome">
         </app-input-field>
 
-        <div class="input-field col s3">
-          <select class="browser-default" id="setor" formControlName="setor">
-            <option *ngFor="let dep of departamentos | async">{{ dep.nome }}</option>
-          </select>
-        </div>
+        <app-input-field class="input-field col s3" formControlName="setor" id="setor" label="Setor"
+          [control]="formulario.get('cabecalho.setor')">
+        </app-input-field>
 
-        <div class="input-field col s2 ">
-          <select class="browser-default" formControlName="senioridade">
-            <option *ngFor="let nivel of niveis | async">{{ nivel.nome }}</option>
-          </select>
-        </div>
+        <app-input-field class="input-field col s2" id="senioridade" label="Senioridade"
+          [control]="formulario.get('cabecalho.senioridade')" formControlName="senioridade">
+        </app-input-field>
 
-        <app-input-field class="input-field col s6" id="cidade" label="Cidade" [control]="formulario.get('cidade')">
+        <app-input-field class="input-field col s6" id="cidade" label="Cidade"
+          [control]="formulario.get('cabecalho.cidade')" formControlName="cidade">
         </app-input-field>
 
         <app-input-field class="input-field col s6" id="linkedin" label="Linkedin"
-          [control]="formulario.get('linkedin')">
+          [control]="formulario.get('cabecalho.linkedin')" formControlName="linkedin">
         </app-input-field>
 
         <div class="input-field col s4">
@@ -33,11 +31,12 @@
         </div>
 
         <app-input-field class="input-field col s4" id="telefone" label="Telefone"
-          [control]="formulario.get('telefone')">
+          [control]="formulario.get('cabecalho.telefone')" formControlName="telefone">
         </app-input-field>
 
         <div class="input-field col s12">
-          <app-input-field id="resumo" label="Resumo" [control]="formulario.get('resumo')">
+          <app-input-field id="resumo" label="Resumo" [control]="formulario.get('cabecalho.resumo')"
+            formControlName="resumo">
           </app-input-field>
           <span class="helper-text" data-error="wrong" data-success="right">Aqui você pode escrever um breve resumo
             sobre
@@ -45,10 +44,9 @@
           </span>
         </div>
 
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate" formControlName="email">
-          <label for="email" required email>Email</label>
-        </div>
+        <app-input-field class="input-field col s12" id="email" label="Email"
+          [control]="formulario.get('cabecalho.email')" formControlName="email">
+        </app-input-field>
 
       </div>
 
@@ -56,40 +54,56 @@
       <div class="input-field col s12 " formArrayName="formacao">
         <h5>Experiência acadêmica:</h5>
 
-        <a class="btn-floating btn-small waves-effect waves-light red " (click)="addExpAcad()"><i
-            class="material-icons">add</i></a>
+        <div class="row" *ngFor="let expAcademica of formulario.get('formacao')?.value" [formGroup]="expAcademica">
 
-        <a class="btn-floating btn-small waves-effect waves-light red" (click)="excluirExpAcademica()"><i
-            class="material-icons">delete</i></a>
-
-
-        <ng-container *ngIf="formulario.get('formacao')">
-          <app-form-exp-acad  *ngFor="let expAcademica of formulario.get('formacao')?.value"
-            [formGroup]="expAcademica"></app-form-exp-acad>
-        </ng-container>
-
+          <div class="input-field col s12">
+            <input id="nomeCurso" type="text" class="validate" name="nomeCurso" formControlName="nomeCurso">
+            <label for="nomeCurso">Nome do Curso</label>
+          </div>
+          <div class="input-field col s6">
+            <input type="date" class="datepicker" formControlName="dataInicio" />
+            <label for="dataInicio">Data de Início: </label>
+          </div>
+          <div class="input-field col s6">
+            <input type="date" class="datepicker" formControlName="dataFim" />
+            <label for="dataFim">Data de Término: </label>
+          </div>
+          <div class="input-field col s12">
+            <input id="nomeInstituicao" type="text" class="validate" name="nomeInstituicao"
+              formControlName="nomeInstituicao">
+            <label for="nomeInstituicao">Nome da Instituição</label>
+          </div>
+        </div>
 
       </div>
 
-      <div class="input-field col s12" formGroupName="experienciaProf">
+      <div class="input-field col s12" formArrayName="experienciaProf">
         <h5>Experiência Profissional:</h5>
 
-        <a class="btn-floating btn-small waves-effect waves-light red " (click)="adicinonarExpProf()"><i
-            class="material-icons">add</i></a>
+        <div *ngFor="let expProfissional of formulario.get('experienciaProf')?.value">
+          <div class="input-field col s12">
+            <input id="nomeCargo" type="text" class="validate" name="nomeCargo">
+            <label for="nomeCargo">Cargo</label>
+          </div>
+          <div class="input-field col s6">
+            <input type="date" class="datepicker" />
+            <label for="dataInicio">Data de Início: MM/AAAA</label>
+          </div>
+          <div class="input-field col s6">
+            <input type="date" class="datepicker" />
+            <label for="dataFim">Data de Término: MM/AAAA</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="nomeEmpresa" type="text" class="validate" name="nomeEmpresa">
+            <label for="nomEmpresa">Nome da Empresa</label>
+          </div>
 
-        <a class="btn-floating btn-small waves-effect waves-light red" (click)="excluirExpProf()"><i
-            class="material-icons">delete</i></a>
-
-
-        <ng-container *ngIf="formulario.get('experienciaProf')">
-          <app-form-exp-prof *ngFor="let expProfissional of formulario.get('experienciaProf')?.value"
-            [formGroup]="expProfissional"></app-form-exp-prof>
-        </ng-container>
+        </div>
 
       </div>
 
 
-      <button class="btn waves-effect waves-light col s4" type="submit" (click)="onSubmit()">Cadastrar
+      <button class="btn waves-effect waves-light col s4" type="submit">Cadastrar
         <i class="material-icons right">send</i>
       </button>
 
