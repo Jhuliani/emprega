@@ -54,51 +54,71 @@
       <div class="input-field col s12 " formArrayName="formacao">
         <h5>Experiência acadêmica:</h5>
 
-        <div class="row" *ngFor="let expAcademica of formulario.get('formacao')?.value" [formGroup]="expAcademica">
 
-          <div class="input-field col s12">
-            <input id="nomeCurso" type="text" class="validate" name="nomeCurso" formControlName="nomeCurso">
-            <label for="nomeCurso">Nome do Curso</label>
+        <a class="btn-floating btn-small waves-effect waves-light red " (click)="addExpAcad()"><i
+            class="material-icons">add</i></a>
+
+        <ng-container *ngFor="let formacaoForm of formacao.controls; let i = index">
+
+          <div [formGroupName]="i">
+            <div class="input-field col s12">
+              <input id="nomeCurso" type="text" class="validate" name="nomeCurso" formControlName="nomeCurso">
+              <label for="nomeCurso">Nome do Curso</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="date" class="datepicker" formControlName="dataInicio" />
+              <label for="dataInicio">Data de Início: </label>
+            </div>
+            <div class="input-field col s6">
+              <input type="date" class="datepicker" formControlName="dataFim" />
+              <label for="dataFim">Data de Término: </label>
+            </div>
+            <div class="input-field col s12">
+              <input id="nomeInstituicao" type="text" class="validate" name="nomeInstituicao"
+                formControlName="nomeInstituicao">
+              <label for="nomeInstituicao">Nome da Instituição</label>
+            </div>
+            <a class="btn-floating btn-small waves-effect waves-light red" (click)="excluirExpAcademica(i)"><i
+                class="material-icons">delete</i></a>
           </div>
-          <div class="input-field col s6">
-            <input type="date" class="datepicker" formControlName="dataInicio" />
-            <label for="dataInicio">Data de Início: </label>
-          </div>
-          <div class="input-field col s6">
-            <input type="date" class="datepicker" formControlName="dataFim" />
-            <label for="dataFim">Data de Término: </label>
-          </div>
-          <div class="input-field col s12">
-            <input id="nomeInstituicao" type="text" class="validate" name="nomeInstituicao"
-              formControlName="nomeInstituicao">
-            <label for="nomeInstituicao">Nome da Instituição</label>
-          </div>
-        </div>
+
+        </ng-container>
 
       </div>
 
       <div class="input-field col s12" formArrayName="experienciaProf">
         <h5>Experiência Profissional:</h5>
 
-        <div *ngFor="let expProfissional of formulario.get('experienciaProf')?.value">
-          <div class="input-field col s12">
-            <input id="nomeCargo" type="text" class="validate" name="nomeCargo">
-            <label for="nomeCargo">Cargo</label>
-          </div>
-          <div class="input-field col s6">
-            <input type="date" class="datepicker" />
-            <label for="dataInicio">Data de Início: MM/AAAA</label>
-          </div>
-          <div class="input-field col s6">
-            <input type="date" class="datepicker" />
-            <label for="dataFim">Data de Término: MM/AAAA</label>
-          </div>
-          <div class="input-field col s12">
-            <input id="nomeEmpresa" type="text" class="validate" name="nomeEmpresa">
-            <label for="nomEmpresa">Nome da Empresa</label>
+        <a class="btn-floating btn-small waves-effect waves-light red " (click)="addExpProf()"><i
+          class="material-icons">add</i></a>
+
+        <ng-container *ngFor="let formacaoProfForm of experienciaProf.controls; let i = index">
+
+          <div [formGroupName]="i">
+
+            <div class="input-field col s12">
+              <input id="nomeCargo" type="text" class="validate" name="nomeCargo" formControlName="nomeCargo">
+              <label for="nomeCargo">Cargo</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="date" class="datepicker" formControlName="dataInicio"/>
+              <label for="dataInicio">Data de Início: MM/AAAA</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="date" class="datepicker" formControlName="dataFim" />
+              <label for="dataFim">Data de Término: MM/AAAA</label>
+            </div>
+            <div class="input-field col s12">
+              <input id="nomeEmpresa" type="text" class="validate" name="nomeEmpresa" formControlName="nomeEmpresa">
+              <label for="nomEmpresa">Nome da Empresa</label>
+            </div>
+
+            <a class="btn-floating btn-small waves-effect waves-light red" (click)="excluirExpProfissional(i)"><i
+              class="material-icons">delete</i></a>
+
           </div>
 
-        </div>
+        </ng-container>
 
       </div>
 

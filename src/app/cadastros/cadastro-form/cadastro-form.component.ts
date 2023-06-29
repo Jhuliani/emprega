@@ -31,7 +31,7 @@ export class CadastroFormComponent implements OnInit {
     private cadastroService: CadastrosService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.departamentos = this.departamentosService.getDepartamentos();
@@ -49,8 +49,8 @@ export class CadastroFormComponent implements OnInit {
         resumo: [null, Validators.required],
         email: [null, [Validators.required, Validators.email]],
       }),
-      formacao: this.formBuilder.array([this.criarExpAcademicaGroup()]),
-      experienciaProf: this.formBuilder.array([this.criarExpProfGroup()])
+      formacao: this.formBuilder.array([]),
+      experienciaProf: this.formBuilder.array([])
     });
   }
 
@@ -71,23 +71,42 @@ export class CadastroFormComponent implements OnInit {
     this.formulario.reset();
   }
 
-  private criarExpAcademicaGroup(): FormGroup {
-    return new FormGroup({
-      'nomeCurso': new FormControl('', Validators.required),
-      'dataInicio': new FormControl('', Validators.required),
-      'dataFim': new FormControl('', Validators.required),
-      'nomeInstituicao': new FormControl('', Validators.required)
-    });
+  public get formacao() {
+    return this.formulario.controls["formacao"] as FormArray
   }
 
   addExpAcad() {
-    const formacao = this.formulario.get('formacao') as FormArray;
-    formacao.push(this.criarExpAcademicaGroup());
+    const formacaoForm = this.formBuilder.group({
+      nomeCurso: ['', Validators.required],
+      dataInicio: ['', Validators.required],
+      dataFim: ['', Validators.required],
+      nomeInstituicao: ['', Validators.required]
+    });
+
+    this.formacao.push(formacaoForm);
   }
 
-  excluirExpAcademica(): void {
-    const formacao = this.formulario.get('formacao') as FormArray;
-    formacao.removeAt(formacao.length - 1);
+  excluirExpAcademica(index: number): void {
+    this.formacao.removeAt(index);
+  }
+
+  public get experienciaProf() {
+    return this.formulario.controls["experienciaProf"] as FormArray
+  }
+
+  addExpProf() {
+    const formacaoProfForm = this.formBuilder.group({
+      nomeCargo: ['', Validators.required],
+      dataInicio: ['', Validators.required],
+      dataFim: ['', Validators.required],
+      nomeEmpresa: ['', Validators.required]
+    });
+
+    this.experienciaProf.push(formacaoProfForm);
+  }
+
+  excluirExpProfissional(index: number): void {
+    this.experienciaProf.removeAt(index);
   }
 
   validarEmail(formControl: FormControl) {
@@ -95,22 +114,5 @@ export class CadastroFormComponent implements OnInit {
       .pipe(map(emailExiste => emailExiste ? { emailInvalido: true } : null));
   }
 
-  private criarExpProfGroup(): FormGroup {
-    return new FormGroup({
-      'nomeCargo': new FormControl('', Validators.required),
-      'dataInicio': new FormControl('', Validators.required),
-      'dataFim': new FormControl('', Validators.required),
-      'nomeEmpresa': new FormControl('', Validators.required)
-    });
-  }
 
-  addExpProf() {
-    const experienciaProf = this.formulario.get('experienciaProf') as FormArray;
-    experienciaProf.push(this.criarExpProfGroup());
-  }
-
-  excluirExpProf() {
-    const experienciaProf = this.formulario.get('experienciaProf') as FormArray;
-    experienciaProf.removeAt(experienciaProf.length - 1);
-  }
 }
