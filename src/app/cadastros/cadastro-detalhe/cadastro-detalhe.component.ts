@@ -61,10 +61,11 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
   }
 
   onEdit(_id: any){
-    this.router.navigate(['editar', _id], { relativeTo: this.route});
+    this.router.navigate(['editar'], { relativeTo: this.route});
   }
 
   onDelete(curriculo: any) {
+
     this.curriculoSelecionado = curriculo;
 
   }

@@ -2,9 +2,9 @@
 
   <h6 class="subsection-title">{{ expAcademica.nomeCurso }}</h6>
 
-  <span class="date"><strong>Data de Início:</strong> {{ expAcademica.dataInicio }}</span>
+  <span class="date"><strong>Data de Início:</strong> {{ expAcademica.dataInicio | date: 'dd/MM/yyyy' }}</span>
   <br>
-  <span class="date"><strong>Data de Fim:</strong> {{ expAcademica.dataFim }}</span>
+  <span class="date"><strong>Data de Fim:</strong> {{ expAcademica.dataFim  | date: 'dd/MM/yyyy'}}</span>
   <br>
   <span class="">{{ expAcademica.nomeInstituicao }}</span>
 

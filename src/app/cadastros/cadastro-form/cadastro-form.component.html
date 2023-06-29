@@ -33,7 +33,7 @@
         </div>
 
         <div class="input-field col s4" >
-          <select class="browser-default" formControlName="nivel">
+          <select class="browser-default" formControlName="senioridade">
             <option *ngFor="let nivel of niveis | async">{{ nivel.nome }}</option>
           </select>
         </div>
@@ -59,7 +59,7 @@
         <h5>Experiência acadêmica:</h5>
 
 
-        <a class="btn-floating btn-small waves-effect waves-light red " (click)="addExpAcad()"><i
+        <a class="btn-floating btn-small waves-effect waves-light" (click)="addExpAcad()"><i
             class="material-icons">add</i></a>
 
         <ng-container *ngFor="let formacaoForm of formacao.controls; let i = index">
@@ -93,7 +93,7 @@
       <div class="input-field col s12" formArrayName="experienciaProf">
         <h5>Experiência Profissional:</h5>
 
-        <a class="btn-floating btn-small waves-effect waves-light red " (click)="addExpProf()"><i
+        <a class="btn-floating btn-small waves-effect waves-light" (click)="addExpProf()"><i
           class="material-icons">add</i></a>
 
         <ng-container *ngFor="let formacaoProfForm of experienciaProf.controls; let i = index">
@@ -117,7 +117,7 @@
               <label for="nomEmpresa">Nome da Empresa</label>
             </div>
 
-            <a class="btn-floating btn-small waves-effect waves-light red" (click)="excluirExpProfissional(i)"><i
+            <a class="btn-floating btn-small waves-effect waves-light deep-orange red" (click)="excluirExpProfissional(i)"><i
               class="material-icons">delete</i></a>
 
           </div>
@@ -129,12 +129,12 @@
 
       <div class="row">
         <div class="col s6">
-          <button class="btn waves-effect waves-light" type="submit">Cadastrar
+          <button class="btn waves-effect waves-light indigo darken-1" type="submit">Cadastrar
             <i class="material-icons right">send</i>
           </button>
         </div>
         <div class="col s6 right-align">
-          <button class="btn waves-effect waves-light" (click)="resetar()">Limpar Formulário
+          <button class="btn waves-effect waves-light  orange lighten-1" (click)="resetar()">Limpar Formulário
             <i class="material-icons right">cancel</i>
           </button>
         </div>

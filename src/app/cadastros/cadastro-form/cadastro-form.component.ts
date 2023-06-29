@@ -9,6 +9,8 @@ import { Observable, filter, map, switchMap } from 'rxjs';
 import { VerificaEmailService } from './services/verifica-email.service';
 import { CadastrosService } from '../cadastros.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Curriculo } from '../interfaces/curriculo';
+import { ExperienciaAcademica } from '../interfaces/experienciaAcademica';
 
 @Component({
   selector: 'app-cadastro-form',
@@ -34,6 +36,9 @@ export class CadastroFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    const curriculo = this.route.snapshot.data['curriculo']
+
     this.departamentos = this.departamentosService.getDepartamentos();
     this.niveis = this.senioridadeService.getSenioridade();
 
@@ -53,6 +58,54 @@ export class CadastroFormComponent implements OnInit {
       experienciaProf: this.formBuilder.array([])
     });
   }
+
+
+  updateForm(curriculo: any) {
+    const formacaoArray = this.formulario.get('formacao') as FormArray;
+    formacaoArray.clear();
+
+    const experienciaProfArray = this.formulario.get('experienciaProf') as FormArray;
+    experienciaProfArray.clear();
+
+    curriculo.formacao.forEach((formacao: any) => {
+      formacaoArray.push(
+        this.formBuilder.group({
+          nomeCurso: formacao.nomeCurso,
+          dataInicio: formacao.dataInicio,
+          dataFim: formacao.dataFim,
+          nomeInstituicao: formacao.nomeInstituicao
+        })
+      );
+    });
+
+    curriculo.experienciaProfArray.forEach((experienciaProf: any) => {
+      experienciaProfArray.push(
+        this.formBuilder.group({
+          nomeCargo: experienciaProf.nomeCurso,
+          dataInicio: experienciaProf.dataInicio,
+          dataFim: experienciaProf.dataFim,
+          nomeInstituicao: experienciaProf.nomeInstituicao
+        })
+      );
+    });
+
+    this.formulario.patchValue({
+      cabecalho: {
+        nome: curriculo.nome,
+        setor: curriculo.setor,
+        senioridade: curriculo.senioridade,
+        cidade: curriculo.cidade,
+        linkedin: curriculo.linkedin,
+        nascimento: curriculo.nascimento,
+        telefone: curriculo.telefone,
+        resumo: curriculo.resumo,
+        email: curriculo.email
+      }
+    });
+  }
+
+
+
 
   onSubmit() {
     console.log(this.formulario.value);

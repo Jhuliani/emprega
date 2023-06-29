@@ -1,9 +1,9 @@
  <div class="input-field col s12">
   <span class="">{{ expProfissional.nomeCargo }}</span>
   <br>
-  <span class="date"><strong>Data de Início:</strong> {{ expProfissional.dataInicio }}</span>
+  <span class="date"><strong>Data de Início:</strong> {{ expProfissional.dataInicio | date: 'dd/MM/yyyy' }}</span>
   <br>
-  <span class="date"><strong>Data de Fim:</strong> {{ expProfissional.dataFim }}</span>
+  <span class="date"><strong>Data de Fim:</strong> {{ expProfissional.dataFim | date: 'dd/MM/yyyy' }}</span>
   <br>
   <span class="">{{ expProfissional.nomeEmpresa }}</span>
 
