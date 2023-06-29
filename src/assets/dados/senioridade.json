@@ -1,4 +1,9 @@
 [{
+	"id": "0",
+	"sigla": "--",
+	"nome": "Senioridade:"
+},
+  {
 	"id": "1",
 	"sigla": "TR1",
 	"nome": "Trainee 1"
@@ -49,7 +54,7 @@
 	"nome": "Senior"
 },
      {
-	"ID": "11",
-	"Sigla": "LT",
-	"Nome": "Lider Técnico"
+	"id": "11",
+	"sigla": "LT",
+	"nome": "Lider Técnico"
 }]

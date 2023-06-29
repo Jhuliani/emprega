@@ -9,13 +9,9 @@
           formControlName="nome">
         </app-input-field>
 
-        <app-input-field class="input-field col s3" formControlName="setor" id="setor" label="Setor"
-          [control]="formulario.get('cabecalho.setor')">
-        </app-input-field>
-
-        <app-input-field class="input-field col s2" id="senioridade" label="Senioridade"
-          [control]="formulario.get('cabecalho.senioridade')" formControlName="senioridade">
-        </app-input-field>
+        <app-input-field class="input-field col s5" id="telefone" label="Telefone"
+        [control]="formulario.get('cabecalho.telefone')" formControlName="telefone">
+      </app-input-field>
 
         <app-input-field class="input-field col s6" id="cidade" label="Cidade"
           [control]="formulario.get('cabecalho.cidade')" formControlName="cidade">
@@ -25,14 +21,22 @@
           [control]="formulario.get('cabecalho.linkedin')" formControlName="linkedin">
         </app-input-field>
 
-        <div class="input-field col s4">
-          <input type="date" class="datepicker" formControlName="nascimento" />
+        <div class="input-field col s4 valign-wrapper">
+          <input type="date" class="datepicker" formControlName="nascimento" id="nascimento" />
           <label for="nascimento">Nascimento</label>
         </div>
 
-        <app-input-field class="input-field col s4" id="telefone" label="Telefone"
-          [control]="formulario.get('cabecalho.telefone')" formControlName="telefone">
-        </app-input-field>
+        <div class="input-field col s4">
+          <select class="browser-default" id="setor" formControlName="setor">
+            <option *ngFor="let dep of departamentos | async">{{ dep.nome }}</option>
+          </select>
+        </div>
+
+        <div class="input-field col s4" >
+          <select class="browser-default" formControlName="nivel">
+            <option *ngFor="let nivel of niveis | async">{{ nivel.nome }}</option>
+          </select>
+        </div>
 
         <div class="input-field col s12">
           <app-input-field id="resumo" label="Resumo" [control]="formulario.get('cabecalho.resumo')"
@@ -123,13 +127,18 @@
       </div>
 
 
-      <button class="btn waves-effect waves-light col s4" type="submit">Cadastrar
-        <i class="material-icons right">send</i>
-      </button>
-
-      <button class="btn waves-effect waves-light col s4" (click)="resetar()">Cancelar
-        <i class="material-icons right">cancel</i>
-      </button>
+      <div class="row">
+        <div class="col s6">
+          <button class="btn waves-effect waves-light" type="submit">Cadastrar
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+        <div class="col s6 right-align">
+          <button class="btn waves-effect waves-light" (click)="resetar()">Limpar Formulário
+            <i class="material-icons right">cancel</i>
+          </button>
+        </div>
+      </div>
 
     </div>
 
