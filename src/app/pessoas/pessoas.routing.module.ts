@@ -5,7 +5,7 @@ import { PessoaDetalheComponent } from "./pessoa-detalhe/pessoa-detalhe.componen
 import { PessoaFormComponent } from "./pessoa-form/pessoa-form.component";
 
 const alunosRoutes: any = [
-  {path: 'pessoas', component: PessoasComponent, children : [
+  {path: 'customers', component: PessoasComponent, children : [
     {path: 'novo', component: PessoaFormComponent},
     {path: ':id', component: PessoaDetalheComponent},
     {path: ':id/editar', component: PessoaFormComponent},

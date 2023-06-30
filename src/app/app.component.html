@@ -4,10 +4,10 @@
         style="margin-left: 15px;">next_week</i>Emprega<br></a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="right ">
-      <li routerLinkActive="active"><a routerLink="/cadastros" [queryParams]="{pagina:1}" *ngIf="mostrarMenu">Cadastros</a></li>
+      <li routerLinkActive="active"><a routerLink="/curriculums" [queryParams]="{pagina:1}" *ngIf="mostrarMenu">Currículos</a></li>
       <!-- <li routerLinkActive="active"><a [routerLink]="['cadastro', idCadastro.value]">Cadastro por ID</a></li> -->
-      <li routerLinkActive="active"><a routerLink="/pessoas" *ngIf="mostrarMenu">Pessoas</a></li>
-      <li routerLinkActive="active"><a routerLink="/cadastros/novo" *ngIf="mostrarMenu">Cadastrar</a></li>
+      <li routerLinkActive="active"><a routerLink="/customers" *ngIf="mostrarMenu">Pessoas Cadastradas</a></li>
+      <li routerLinkActive="active"><a routerLink="/curriculums/novo" *ngIf="mostrarMenu">Cadastrar</a></li>
       <li routerLinkActive="active"><a routerLink="/login" *ngIf="!mostrarMenu">Login</a></li>
       <li><a routerLink="/login" *ngIf="mostrarMenu" (click)="logout()"><i class="material-icons">exit_to_app</i></a></li>
     </ul>

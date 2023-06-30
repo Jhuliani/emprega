@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { PessoasService } from './pessoas.service';
+import { Customer } from './customers';
+import { EMPTY, Observable, Subject, Subscription, catchError } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pessoas',
@@ -7,16 +10,48 @@ import { PessoasService } from './pessoas.service';
   styleUrls: ['./pessoas.component.css']
 })
 export class PessoasComponent {
-  pessoas: any[] = [];
+  customers$!: Observable<Customer[]>;
+  error$ = new Subject<boolean>();
 
-  constructor(private pessoasService: PessoasService){
+  pagina!: number;
+  inscricao!: Subscription;
 
-  }
+  constructor(
+    private pessoasService: PessoasService,
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit() {
-    this.pessoas = this.pessoasService.getPessoas();
+
+    this.customers$ = this.pessoasService.list()
+    .pipe(
+      catchError(error => {
+        console.error(error);
+        this.error$.next(true);
+        return EMPTY;
+      })
+    );
+
+    this.inscricao = this.route.queryParams.subscribe(
+      (queryParams: any) => {
+        this.pagina = queryParams['pagina'];
+      }
+    )
+
+  }
+  ngOnDestroy(){
+    this.inscricao.unsubscribe();
   }
 
+  proximaPagina(){
+    //this.pagina++;
+    this.router.navigate(['/customers'],
+    {queryParams:  {'pagina': ++this.pagina}});
+  }
+
+  novoCadastro(){
+    this.router.navigate(['customers/novo']);
+  }
 
 
 }

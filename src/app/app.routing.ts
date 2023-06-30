@@ -10,8 +10,8 @@ import { CadastroNaoEncontradoComponent } from './cadastros/cadastro-nao-encontr
 const APP_ROUTES: Routes = [
 
   {path: 'login', component: LoginComponent },
-  {path: 'cadastros', component: CadastrosComponent},
-  {path: 'cadastro/:id', component: CadastroDetalheComponent},
+  {path: 'curriculums', component: CadastrosComponent},
+  {path: 'curriculum/:id', component: CadastroDetalheComponent},
   {path: 'naoEncontrado', component: CadastroNaoEncontradoComponent},
   {path: '', component: HomeComponent}
 

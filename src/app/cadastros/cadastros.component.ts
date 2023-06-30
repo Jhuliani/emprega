@@ -11,6 +11,8 @@ import { Curriculo } from './interfaces/curriculo';
 })
 export class CadastrosComponent {
   cadastros$!: Observable<Curriculo[]>;
+
+
   error$ = new Subject<boolean>();
 
   pagina!: number;
@@ -31,6 +33,8 @@ export class CadastrosComponent {
         return EMPTY;
       })
     );
+
+
 
     this.inscricao = this.route.queryParams.subscribe(
       (queryParams: any) => {
@@ -53,5 +57,6 @@ export class CadastrosComponent {
   novoCadastro(){
     this.router.navigate(['cadastros/novo']);
   }
+
 
 }

@@ -1,19 +1,58 @@
+
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, tap } from 'rxjs';
+import { delay, map, take } from 'rxjs/operators';
+import { Customer } from './customers';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PessoasService {
 
-  private pessoas: any[] = [
-    {id: 1, nome: 'Pessoa 01', email: 'pessoa@email.com'},
-    {id: 2, nome: 'Pessoa 02', email: 'pessoa@email.com'},
-    {id: 3, nome: 'Pessoa 03', email: 'pessoa@email.com'}
-  ]
+  private readonly API = 'http://localhost:3000/customers';
 
-  getPessoas(){
-    return this.pessoas;
+
+  constructor(private http: HttpClient) { }
+
+
+
+  list(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(this.API)
+    .pipe(
+      delay(500),
+      tap(data => console.log('Dados da API:', data))
+    );
   }
 
-  constructor() { }
+
+  loadById(id: any){
+    return this.http.get(`${this.API}/${id}`).pipe(take(1));
+  }
+
+  getById(id: string): Observable<Customer | null> {
+    return this.list().pipe(
+      map(cadastros => cadastros.find(cadastro => cadastro._id === id) || null)
+    );
+  }
+
+
+  create(cadastro: Customer) {
+    return this.http.post(this.API, cadastro).pipe(take(1));
+  }
+
+  update(customer: Customer){
+    return this. http.put(`${this.API}/${customer._id}`, customer).pipe(take(1));
+  }
+
+  save(customer: Customer){
+    if(customer._id){
+      return this.update(customer);
+    }
+    return this.create(customer);
+  }
+
 }
+
+

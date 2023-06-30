@@ -9,8 +9,6 @@ import { Observable, filter, map, switchMap } from 'rxjs';
 import { VerificaEmailService } from './services/verifica-email.service';
 import { CadastrosService } from '../cadastros.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Curriculo } from '../interfaces/curriculo';
-import { ExperienciaAcademica } from '../interfaces/experienciaAcademica';
 
 @Component({
   selector: 'app-cadastro-form',
@@ -24,6 +22,7 @@ export class CadastroFormComponent implements OnInit {
 
   departamentos!: Observable<Departamentos[]>;
   niveis!: Observable<Senioridade[]>;
+  location: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,7 +42,7 @@ export class CadastroFormComponent implements OnInit {
     this.niveis = this.senioridadeService.getSenioridade();
 
     this.formulario = this.formBuilder.group({
-      cabecalho: this.formBuilder.group({
+   //   cabecalho: this.formBuilder.group({
         nome: [null, Validators.required],
         setor: [null, Validators.required],
         senioridade: [null, Validators.required],
@@ -53,44 +52,45 @@ export class CadastroFormComponent implements OnInit {
         telefone: [null, Validators.required],
         resumo: [null, Validators.required],
         email: [null, [Validators.required, Validators.email]],
-      }),
-      formacao: this.formBuilder.array([]),
-      experienciaProf: this.formBuilder.array([])
+    //  }),
+      token:['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTlkMGZmNDQ4NWJkOTBmMzZkNTNlNyIsImVtYWlsIjoiamh1bGlhbmlzYW50b3NAZ21haWwuY29tIiwibmFtZSI6IkpodWxpIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2ODgxMzQ4MDgsImV4cCI6MTY4ODIyMTIwOH0.1s_G855mKmmFyxFfsjm4KRL10rhaNwfXVbudiuaNWUk'],
+      experienciaAcademica: this.formBuilder.array([]),
+      experienciaProfissional: this.formBuilder.array([])
     });
   }
 
 
   updateForm(curriculo: any) {
-    const formacaoArray = this.formulario.get('formacao') as FormArray;
-    formacaoArray.clear();
+    const experienciaAcademicaArray = this.formulario.get('experienciaAcademica') as FormArray;
+    experienciaAcademicaArray.clear();
 
-    const experienciaProfArray = this.formulario.get('experienciaProf') as FormArray;
-    experienciaProfArray.clear();
+    const experienciaProfissionalArray = this.formulario.get('experienciaProfissional') as FormArray;
+    experienciaProfissionalArray.clear();
 
-    curriculo.formacao.forEach((formacao: any) => {
-      formacaoArray.push(
+    curriculo.experienciaAcademica.forEach((experienciaAcademica: any) => {
+      experienciaAcademicaArray.push(
         this.formBuilder.group({
-          nomeCurso: formacao.nomeCurso,
-          dataInicio: formacao.dataInicio,
-          dataFim: formacao.dataFim,
-          nomeInstituicao: formacao.nomeInstituicao
+          nomeCurso: experienciaAcademica.nomeCurso,
+          dataInicio: experienciaAcademica.dataInicio,
+          dataFim: experienciaAcademica.dataFim,
+          nomeInstituicao: experienciaAcademica.nomeInstituicao
         })
       );
     });
 
-    curriculo.experienciaProfArray.forEach((experienciaProf: any) => {
-      experienciaProfArray.push(
+    curriculo.experienciaProfissionalArray.forEach((experienciaProfissional: any) => {
+      experienciaProfissionalArray.push(
         this.formBuilder.group({
-          nomeCargo: experienciaProf.nomeCurso,
-          dataInicio: experienciaProf.dataInicio,
-          dataFim: experienciaProf.dataFim,
-          nomeInstituicao: experienciaProf.nomeInstituicao
+          nomeCargo: experienciaProfissional.nomeCurso,
+          dataInicio: experienciaProfissional.dataInicio,
+          dataFim: experienciaProfissional.dataFim,
+          nomeInstituicao: experienciaProfissional.nomeInstituicao
         })
       );
     });
 
     this.formulario.patchValue({
-      cabecalho: {
+     // cabecalho: {
         nome: curriculo.nome,
         setor: curriculo.setor,
         senioridade: curriculo.senioridade,
@@ -100,7 +100,7 @@ export class CadastroFormComponent implements OnInit {
         telefone: curriculo.telefone,
         resumo: curriculo.resumo,
         email: curriculo.email
-      }
+    //  }
     });
   }
 
@@ -110,9 +110,14 @@ export class CadastroFormComponent implements OnInit {
   onSubmit() {
     console.log(this.formulario.value);
 
+
     if (this.formulario.valid) {
+      console.log('submit');
       this.cadastroService.create(this.formulario.value).subscribe({
-        next: success => console.log('Sucesso'),
+        next: success => {
+          console.log('Sucesso');
+          this.location.back();
+        },
         error: error => console.error('error')
       });
     } else {
@@ -124,27 +129,27 @@ export class CadastroFormComponent implements OnInit {
     this.formulario.reset();
   }
 
-  public get formacao() {
-    return this.formulario.controls["formacao"] as FormArray
+  public get experienciaAcademica() {
+    return this.formulario.controls["experienciaAcademica"] as FormArray
   }
 
   addExpAcad() {
-    const formacaoForm = this.formBuilder.group({
+    const experienciaAcademicaForm = this.formBuilder.group({
       nomeCurso: ['', Validators.required],
       dataInicio: ['', Validators.required],
       dataFim: ['', Validators.required],
       nomeInstituicao: ['', Validators.required]
     });
 
-    this.formacao.push(formacaoForm);
+    this.experienciaAcademica.push(experienciaAcademicaForm);
   }
 
   excluirExpAcademica(index: number): void {
-    this.formacao.removeAt(index);
+    this.experienciaAcademica.removeAt(index);
   }
 
-  public get experienciaProf() {
-    return this.formulario.controls["experienciaProf"] as FormArray
+  public get experienciaProfissional() {
+    return this.formulario.controls["experienciaProfissional"] as FormArray
   }
 
   addExpProf() {
@@ -155,11 +160,11 @@ export class CadastroFormComponent implements OnInit {
       nomeEmpresa: ['', Validators.required]
     });
 
-    this.experienciaProf.push(formacaoProfForm);
+    this.experienciaProfissional.push(formacaoProfForm);
   }
 
   excluirExpProfissional(index: number): void {
-    this.experienciaProf.removeAt(index);
+    this.experienciaProfissional.removeAt(index);
   }
 
   validarEmail(formControl: FormControl) {

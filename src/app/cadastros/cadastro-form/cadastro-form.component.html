@@ -3,22 +3,22 @@
 
 
     <div class="form-group">
-      <div formGroupName="cabecalho">
+      <div >
 
-        <app-input-field class="input-field col s7" id="nome" label="Nome" [control]="formulario.get('cabecalho.nome')"
+        <app-input-field class="input-field col s7" id="nome" label="Nome" [control]="formulario.get('nome')"
           formControlName="nome">
         </app-input-field>
 
         <app-input-field class="input-field col s5" id="telefone" label="Telefone"
-        [control]="formulario.get('cabecalho.telefone')" formControlName="telefone">
+        [control]="formulario.get('telefone')" formControlName="telefone">
       </app-input-field>
 
         <app-input-field class="input-field col s6" id="cidade" label="Cidade"
-          [control]="formulario.get('cabecalho.cidade')" formControlName="cidade">
+          [control]="formulario.get('cidade')" formControlName="cidade">
         </app-input-field>
 
         <app-input-field class="input-field col s6" id="linkedin" label="Linkedin"
-          [control]="formulario.get('cabecalho.linkedin')" formControlName="linkedin">
+          [control]="formulario.get('linkedin')" formControlName="linkedin">
         </app-input-field>
 
         <div class="input-field col s4 valign-wrapper">
@@ -39,7 +39,7 @@
         </div>
 
         <div class="input-field col s12">
-          <app-input-field id="resumo" label="Resumo" [control]="formulario.get('cabecalho.resumo')"
+          <app-input-field id="resumo" label="Resumo" [control]="formulario.get('resumo')"
             formControlName="resumo">
           </app-input-field>
           <span class="helper-text" data-error="wrong" data-success="right">Aqui você pode escrever um breve resumo
@@ -49,20 +49,20 @@
         </div>
 
         <app-input-field class="input-field col s12" id="email" label="Email"
-          [control]="formulario.get('cabecalho.email')" formControlName="email">
+          [control]="formulario.get('email')" formControlName="email">
         </app-input-field>
 
       </div>
 
 
-      <div class="input-field col s12 " formArrayName="formacao">
+      <div class="input-field col s12 " formArrayName="experienciaAcademica">
         <h5>Experiência acadêmica:</h5>
 
 
         <a class="btn-floating btn-small waves-effect waves-light" (click)="addExpAcad()"><i
             class="material-icons">add</i></a>
 
-        <ng-container *ngFor="let formacaoForm of formacao.controls; let i = index">
+        <ng-container *ngFor="let experienciaAcademicaForm of experienciaAcademica.controls; let i = index">
 
           <div [formGroupName]="i">
             <div class="input-field col s12">
@@ -90,13 +90,13 @@
 
       </div>
 
-      <div class="input-field col s12" formArrayName="experienciaProf">
+      <div class="input-field col s12" formArrayName="experienciaProfissional">
         <h5>Experiência Profissional:</h5>
 
         <a class="btn-floating btn-small waves-effect waves-light" (click)="addExpProf()"><i
           class="material-icons">add</i></a>
 
-        <ng-container *ngFor="let formacaoProfForm of experienciaProf.controls; let i = index">
+        <ng-container *ngFor="let experienciaProfissionalForm of experienciaProfissional.controls; let i = index">
 
           <div [formGroupName]="i">
 

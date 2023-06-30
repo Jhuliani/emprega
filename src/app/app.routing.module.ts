@@ -6,7 +6,7 @@ import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./guards/auth.guard";
 
 const appRoutes: Routes = [
-  {path: 'cadastros', loadChildren: () => import('../app/cadastros/cadastros.module').then(m => m.CadastrosModule), canActivate: [AuthGuard]  },
+  {path: 'curriculums', loadChildren: () => import('../app/cadastros/cadastros.module').then(m => m.CadastrosModule), canActivate: [AuthGuard]  },
   {path: '', component: HomeComponent, canActivate: [AuthGuard] },
   {path: 'login', component: LoginComponent}
 ];

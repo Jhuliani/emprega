@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Curriculo } from './interfaces/curriculo';
 import { Observable, tap } from 'rxjs';
 import { delay, map, take } from 'rxjs/operators';
 import { ExperienciaProfissional } from './interfaces/experienciaProfissional';
+import { AuthService } from '../login/auth.service';
 
 
 @Injectable({
@@ -14,7 +15,8 @@ export class CadastrosService {
   private readonly API = 'http://localhost:3000/curriculums';
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private authService: AuthService) { }
 
 
 
@@ -44,8 +46,11 @@ export class CadastrosService {
 
   }
 
+
+
   create(cadastro: Curriculo) {
     return this.http.post(this.API, cadastro).pipe(take(1));
+
   }
 
   update(curriculo: Curriculo){

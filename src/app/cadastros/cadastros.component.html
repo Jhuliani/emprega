@@ -4,7 +4,7 @@
 
     <div class="collection" *ngIf="cadastros$ | async as cadastros; else loading">
 
-      <a class="collection-item" *ngFor="let cadastro of cadastros" [routerLink]="['/cadastros', cadastro._id]">
+      <a class="collection-item" *ngFor="let cadastro of cadastros" [routerLink]="['/curriculums', cadastro._id]">
         {{ cadastro.nome }} <br>
         <span class="grey-text text-darken-4">{{cadastro.setor}} <strong>{{cadastro.senioridade}}</strong> </span>
 

@@ -1,14 +1,36 @@
 <div class="row">
-  <div class="col s6">
-    <p>Lista de Pessoas:</p>
+  <div class="col s12">
+    <p>Lista de Pessoas Cadastradas:</p>
 
-    <div class="collection">
-      <a class="collection-item" *ngFor="let pessoa of pessoas">
-        {{ pessoa.nome }}
+    <div class="collection" *ngIf="customers$ | async as cadastros; else loading">
+
+      <a class="collection-item" *ngFor="let cadastro of cadastros" [routerLink]="['/customers', cadastro._id]">
+
+        <span class="grey-text text-darken-4">{{ cadastro.name }} <br> <strong>{{cadastro.email}}</strong> </span>
+
       </a>
     </div>
+
+    <ng-template #loading>
+      <div *ngIf="error$ | async; else loadingNoError">
+        Erro ao carregar cadastros.
+      </div>
+      <ng-template #loadingNoError>
+        <span>
+          <div class="progress">
+            <div class="indeterminate"></div>
+          </div>
+        </span>
+      </ng-template>
+
+    </ng-template>
+
+
+    <p>Página: {{ pagina }}</p>
+    <button (click)="proximaPagina()"> Prox Página</button>
+
+    <button (click)="novoCadastro()"> Adicionar </button>
+
+
   </div>
-</div>
-<div class="col s6">
-  <router-outlet></router-outlet>
 </div>

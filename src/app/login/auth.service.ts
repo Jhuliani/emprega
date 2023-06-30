@@ -1,6 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Usuario } from './usuario';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,11 @@ export class AuthService {
 
   usuarioAutenticado: boolean = false;
 
+
   mostrarMenuEmitter = new EventEmitter<boolean>();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private http: HttpClient) { }
 
 
   fazerLogin(usuario: Usuario) {
@@ -36,9 +40,10 @@ export class AuthService {
 
     this.usuarioAutenticado = false;
     this.mostrarMenuEmitter.emit(false);
-
-
   }
+
+
+
 
 }
 

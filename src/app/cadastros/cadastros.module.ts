@@ -15,6 +15,7 @@ import { VerificaEmailService } from "./cadastro-form/services/verifica-email.se
 import { SharedModule } from "../shared/shared.module";
 import { DetalheExpProfComponent } from './cadastro-detalhe/detalhe-exp-prof/detalhe-exp-prof.component';
 import { DetalheExpAcadComponent } from './cadastro-detalhe/detalhe-exp-acad/detalhe-exp-acad.component';
+import { AuthService } from "../login/auth.service";
 
 
 
@@ -32,7 +33,8 @@ import { DetalheExpAcadComponent } from './cadastro-detalhe/detalhe-exp-acad/det
 
     ],
     providers: [CadastrosService,
-                VerificaEmailService],
+                VerificaEmailService,
+                AuthService],
     imports: [
         SharedModule,
         CommonModule,

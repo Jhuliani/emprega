@@ -13,6 +13,7 @@ import { ExperienciaAcademica } from '../interfaces/experienciaAcademica';
 })
 export class CadastroDetalheComponent implements OnInit, OnDestroy {
   id!: string;
+
   curriculo!: Curriculo | null;
   experienciasProfissionais: ExperienciaProfissional[] = [];
   experienciasAcademicas: ExperienciaAcademica[] = [];
@@ -43,6 +44,7 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
             if (curriculo) {
               this.experienciasProfissionais = curriculo.experienciaProfissional;
               this.experienciasAcademicas = curriculo.experienciaAcademica;
+
             } else {
               this.experienciasProfissionais = [];
               this.experienciasAcademicas = [];
