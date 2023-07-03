@@ -26,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     PessoasModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

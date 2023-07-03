@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { EMPTY, Observable, Subscription, catchError } from 'rxjs';
 import { CadastrosService } from '../cadastros.service';
 import { Curriculo } from '../interfaces/curriculo';
 import { ExperienciaProfissional } from '../interfaces/experienciaProfissional';
 import { ExperienciaAcademica } from '../interfaces/experienciaAcademica';
+import { Location } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-cadastro-detalhe',
@@ -18,13 +21,18 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
   experienciasProfissionais: ExperienciaProfissional[] | null = [];
   experienciasAcademicas: ExperienciaAcademica[] | null = [];
   inscricao: Subscription = new Subscription();
+
   @ViewChild('deleteModal', { static: true }) deleteModal: any;
   curriculoSelecionado!: Curriculo;
+  curriculos$!: Observable<Curriculo[]>;
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private cadastrosService: CadastrosService
+    private cadastrosService: CadastrosService,
+    private location: Location
+
   ) { }
 
 
@@ -62,20 +70,35 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
 
   }
 
+  onRefresh() {
+    this.curriculos$ = this.cadastrosService.list().pipe(
+
+      catchError(error => {
+        console.error(error);
+        return EMPTY;
+      })
+    )}
+
+
+
   onEdit(_id: any){
     this.router.navigate(['editar'], { relativeTo: this.route});
   }
 
-  onDelete(curriculo: any) {
+  onDelete(id: any) {
 
-    this.curriculoSelecionado = curriculo;
+    this.cadastrosService.remove(id)
+    .subscribe({
+      next: () => {
+        console.log('Sucesso');
+        //this.onRefresh()
+        this.location.back();
+      },
+      error: () => console.error('error')
+  })
 
   }
 
-  // onConfirmDelete() {
-  //   this.cadastrosService.delete(this.curriculoSelecionado.id)
-
-  // }
 
   ngOnDestroy() {
     this.inscricao.unsubscribe();

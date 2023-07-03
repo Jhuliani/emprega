@@ -65,6 +65,14 @@ export class CadastrosService {
     return this.create(curriculo);
   }
 
+  remove(id: string){
+
+    console.log(id);
+    return this. http.delete(`${this.API}/${id}`).pipe(take(1));
+
+
+  }
+
 }
 
 

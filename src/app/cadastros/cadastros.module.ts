@@ -42,7 +42,7 @@ import { AuthService } from "../login/auth.service";
         CadastrosRoutingModule,
         ReactiveFormsModule,
         SharedModule,
-        HttpClientModule
+        HttpClientModule,
 
     ]
 })
