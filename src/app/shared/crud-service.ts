@@ -1,5 +1,4 @@
 import { HttpClient } from "@angular/common/http";
-import { Curriculo } from "../cadastros/interfaces/curriculo";
 import { delay, take, tap } from "rxjs";
 
 export class CrudService<T> {

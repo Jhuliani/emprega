@@ -16,6 +16,7 @@ import { SharedModule } from "../shared/shared.module";
 import { DetalheExpProfComponent } from './cadastro-detalhe/detalhe-exp-prof/detalhe-exp-prof.component';
 import { DetalheExpAcadComponent } from './cadastro-detalhe/detalhe-exp-acad/detalhe-exp-acad.component';
 import { AuthService } from "../login/auth.service";
+import { CadastroBuscaComponent } from './cadastro-busca/cadastro-busca.component';
 
 
 
@@ -29,7 +30,8 @@ import { AuthService } from "../login/auth.service";
         FormExpAcadComponent,
         FormExpProfComponent,
         DetalheExpProfComponent,
-        DetalheExpAcadComponent
+        DetalheExpAcadComponent,
+        CadastroBuscaComponent
 
     ],
     providers: [CadastrosService,
