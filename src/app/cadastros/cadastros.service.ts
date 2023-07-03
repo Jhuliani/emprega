@@ -48,13 +48,13 @@ export class CadastrosService {
 
 
 
-  create(cadastro: Curriculo) {
+  private create(cadastro: Curriculo) {
     return this.http.post(this.API, cadastro).pipe(take(1));
 
   }
 
 
-  update(curriculo: Curriculo){
+  private update(curriculo: Curriculo){
     return this. http.put(`${this.API}/${curriculo._id}`, curriculo).pipe(take(1));
   }
 

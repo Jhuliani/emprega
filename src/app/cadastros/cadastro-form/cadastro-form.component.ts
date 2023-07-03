@@ -132,23 +132,13 @@ export class CadastroFormComponent implements OnInit {
 
     if (this.formulario.valid) {
       console.log('submit');
-      if(this.formulario.value._id){
-        this.cadastroService.update(this.formulario.value).subscribe({
-          next: () => {
-            console.log('Sucesso');
-            this.location.back();
-          },
-          error: () => console.error('error')
-      });
-      }else{
-        this.cadastroService.create(this.formulario.value).subscribe({
-          next: () => {
-            console.log('Sucesso');
-            this.location.back();
-          },
-          error: () => console.error('error')
-        });
-      }
+      this.cadastroService.save(this.formulario.value).subscribe({
+        next: () => {
+          console.log('Sucesso');
+          this.location.back();
+        },
+        error: () => console.error('error')
+    });
 
     } else {
       console.log('Formulário inválido');
