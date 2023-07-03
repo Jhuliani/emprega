@@ -9,6 +9,8 @@ import { Observable, filter, map, switchMap } from 'rxjs';
 import { VerificaEmailService } from './services/verifica-email.service';
 import { CadastrosService } from '../cadastros.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Curriculo } from '../interfaces/curriculo';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cadastro-form',
@@ -22,7 +24,7 @@ export class CadastroFormComponent implements OnInit {
 
   departamentos!: Observable<Departamentos[]>;
   niveis!: Observable<Senioridade[]>;
-  location: any;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,78 +33,95 @@ export class CadastroFormComponent implements OnInit {
     private verificaEmailService: VerificaEmailService,
     private cadastroService: CadastrosService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit() {
 
-    const curriculo = this.route.snapshot.data['curriculo']
+
+
+    //const curriculo = this.route.snapshot.data['curriculo'] //resolve
+
+    this.route.params
+    .pipe(
+      map((params: any) => params['id']),
+      switchMap(id => this.cadastroService.loadById(id)),
+      // switchMap(cursos => obterAulas)
+    )
+    .subscribe(curriculo => this.updateForm(curriculo));
+
 
     this.departamentos = this.departamentosService.getDepartamentos();
     this.niveis = this.senioridadeService.getSenioridade();
 
     this.formulario = this.formBuilder.group({
-   //   cabecalho: this.formBuilder.group({
+
+        _id: [null ],
         nome: [null, Validators.required],
-        setor: [null, Validators.required],
+        setor: [null , Validators.required],
         senioridade: [null, Validators.required],
-        cidade: [null, Validators.required],
-        linkedin: [null, Validators.required],
-        nascimento: [null, Validators.required],
-        telefone: [null, Validators.required],
+        cidade: [null , Validators.required],
+        linkedin: [null , Validators.required],
+        nascimento: [null , Validators.required],
+        telefone: [null , Validators.required],
         resumo: [null, Validators.required],
         email: [null, [Validators.required, Validators.email]],
-    //  }),
-      token:['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTlkMGZmNDQ4NWJkOTBmMzZkNTNlNyIsImVtYWlsIjoiamh1bGlhbmlzYW50b3NAZ21haWwuY29tIiwibmFtZSI6IkpodWxpIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2ODgxMzQ4MDgsImV4cCI6MTY4ODIyMTIwOH0.1s_G855mKmmFyxFfsjm4KRL10rhaNwfXVbudiuaNWUk'],
+
+      token:['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTlkMGZmNDQ4NWJkOTBmMzZkNTNlNyIsImVtYWlsIjoiamh1bGlhbmlzYW50b3NAZ21haWwuY29tIiwibmFtZSI6IkpodWxpIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2ODgzODUyNjQsImV4cCI6MTY4ODQ3MTY2NH0.6x_BaJnTmzelYBSa50AITiakCi31Xh-NNk21PIqjvco'],
       experienciaAcademica: this.formBuilder.array([]),
       experienciaProfissional: this.formBuilder.array([])
     });
+
+
+
   }
 
 
-  updateForm(curriculo: any) {
-    const experienciaAcademicaArray = this.formulario.get('experienciaAcademica') as FormArray;
-    experienciaAcademicaArray.clear();
+    updateForm(curriculo: any) {
+      const experienciaAcademicaArray = this.formulario.get('experienciaAcademica') as FormArray;
+      experienciaAcademicaArray.clear();
 
-    const experienciaProfissionalArray = this.formulario.get('experienciaProfissional') as FormArray;
-    experienciaProfissionalArray.clear();
+      const experienciaProfissionalArray = this.formulario.get('experienciaProfissional') as FormArray;
+      experienciaProfissionalArray.clear();
 
-    curriculo.experienciaAcademica.forEach((experienciaAcademica: any) => {
-      experienciaAcademicaArray.push(
-        this.formBuilder.group({
-          nomeCurso: experienciaAcademica.nomeCurso,
-          dataInicio: experienciaAcademica.dataInicio,
-          dataFim: experienciaAcademica.dataFim,
-          nomeInstituicao: experienciaAcademica.nomeInstituicao
-        })
-      );
-    });
+      curriculo.experienciaAcademica.forEach((experienciaAcademica: any) => {
+        experienciaAcademicaArray.push(
+          this.formBuilder.group({
+            nomeCurso: experienciaAcademica.nomeCurso,
+            dataInicio: experienciaAcademica.dataInicio,
+            dataFim: experienciaAcademica.dataFim,
+            nomeInstituicao: experienciaAcademica.nomeInstituicao
+          })
+        );
+      });
 
-    curriculo.experienciaProfissionalArray.forEach((experienciaProfissional: any) => {
-      experienciaProfissionalArray.push(
-        this.formBuilder.group({
-          nomeCargo: experienciaProfissional.nomeCurso,
-          dataInicio: experienciaProfissional.dataInicio,
-          dataFim: experienciaProfissional.dataFim,
-          nomeInstituicao: experienciaProfissional.nomeInstituicao
-        })
-      );
-    });
+      curriculo.experienciaProfissional.forEach((experienciaProfissional: any) => {
+        experienciaProfissionalArray.push(
+          this.formBuilder.group({
+            nomeCargo: experienciaProfissional.nomeCargo,
+            dataInicio: experienciaProfissional.dataInicio,
+            dataFim: experienciaProfissional.dataFim,
+            nomeEmpresa: experienciaProfissional.nomeEmpresa
+          })
+        );
+      });
 
-    this.formulario.patchValue({
-     // cabecalho: {
-        nome: curriculo.nome,
-        setor: curriculo.setor,
-        senioridade: curriculo.senioridade,
-        cidade: curriculo.cidade,
-        linkedin: curriculo.linkedin,
-        nascimento: curriculo.nascimento,
-        telefone: curriculo.telefone,
-        resumo: curriculo.resumo,
-        email: curriculo.email
-    //  }
-    });
-  }
+      this.formulario.patchValue({
+
+          _id: curriculo._id,
+          nome: curriculo.nome,
+          setor: curriculo.setor,
+          senioridade: curriculo.senioridade,
+          cidade: curriculo.cidade,
+          linkedin: curriculo.linkedin,
+          nascimento: curriculo.nascimento,
+          telefone: curriculo.telefone,
+          resumo: curriculo.resumo,
+          email: curriculo.email
+
+      });
+    }
 
 
 
@@ -113,13 +132,24 @@ export class CadastroFormComponent implements OnInit {
 
     if (this.formulario.valid) {
       console.log('submit');
-      this.cadastroService.create(this.formulario.value).subscribe({
-        next: success => {
-          console.log('Sucesso');
-          this.location.back();
-        },
-        error: error => console.error('error')
+      if(this.formulario.value._id){
+        this.cadastroService.update(this.formulario.value).subscribe({
+          next: () => {
+            console.log('Sucesso');
+            this.location.back();
+          },
+          error: () => console.error('error')
       });
+      }else{
+        this.cadastroService.create(this.formulario.value).subscribe({
+          next: () => {
+            console.log('Sucesso');
+            this.location.back();
+          },
+          error: () => console.error('error')
+        });
+      }
+
     } else {
       console.log('Formulário inválido');
     }

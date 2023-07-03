@@ -15,8 +15,8 @@ export class CadastroDetalheComponent implements OnInit, OnDestroy {
   id!: string;
 
   curriculo!: Curriculo | null;
-  experienciasProfissionais: ExperienciaProfissional[] = [];
-  experienciasAcademicas: ExperienciaAcademica[] = [];
+  experienciasProfissionais: ExperienciaProfissional[] | null = [];
+  experienciasAcademicas: ExperienciaAcademica[] | null = [];
   inscricao: Subscription = new Subscription();
   @ViewChild('deleteModal', { static: true }) deleteModal: any;
   curriculoSelecionado!: Curriculo;

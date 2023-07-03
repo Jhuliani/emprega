@@ -30,7 +30,7 @@ export class CadastrosService {
 
 
   loadById(id: any){
-    return this.http.get(`${this.API}/${id}`).pipe(take(1));
+    return this.http.get<Curriculo>(`${this.API}/${id}`).pipe(take(1));
   }
 
   getById(id: string): Observable<Curriculo | null> {
@@ -39,7 +39,7 @@ export class CadastrosService {
     );
   }
 
-  getExpProfById(id: string): Observable<ExperienciaProfissional[]> {
+  getExpProfById(id: string): Observable<ExperienciaProfissional[] | null> {
     return this.getById(id).pipe(
       map(curriculo => curriculo ? curriculo.experienciaProfissional : [])
     );
@@ -52,6 +52,7 @@ export class CadastrosService {
     return this.http.post(this.API, cadastro).pipe(take(1));
 
   }
+
 
   update(curriculo: Curriculo){
     return this. http.put(`${this.API}/${curriculo._id}`, curriculo).pipe(take(1));
