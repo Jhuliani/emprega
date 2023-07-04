@@ -70,7 +70,10 @@ export class CadastrosService {
     console.log(id);
     return this. http.delete(`${this.API}/${id}`).pipe(take(1));
 
+  }
 
+  urlSearch():string {
+    return this.API;
   }
 
 }
