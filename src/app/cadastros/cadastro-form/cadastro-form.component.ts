@@ -5,7 +5,7 @@ import { Departamentos } from 'src/app/shared/models/departamentos.model';
 import { DepartamentosService } from '../../shared/services/departamentos.service';
 import { Senioridade } from 'src/app/shared/models/senioridade.model';
 import { SenioridadeService } from '../../shared/services/senioridade.service';
-import { Observable, filter, map, switchMap } from 'rxjs';
+import { EMPTY, Observable, filter, map, switchMap } from 'rxjs';
 import { VerificaEmailService } from './services/verifica-email.service';
 import { CadastrosService } from '../cadastros.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -41,15 +41,23 @@ export class CadastroFormComponent implements OnInit {
 
 
 
-    //const curriculo = this.route.snapshot.data['curriculo'] //resolve
-
     this.route.params
-    .pipe(
-      map((params: any) => params['id']),
-      switchMap(id => this.cadastroService.loadById(id)),
-      // switchMap(cursos => obterAulas)
-    )
-    .subscribe(curriculo => this.updateForm(curriculo));
+      .pipe(
+        map((params: any) => params['id']),
+        switchMap(id => {
+          if (id) {
+            return this.cadastroService.loadById(id);
+          } else {
+            // Tratar o caso em que o 'id' é undefined ou não está presente.
+            // Por exemplo, você pode retornar um Observable vazio ou tratar o erro de forma apropriada.
+            // Aqui, estou retornando um Observable vazio como exemplo.
+            return EMPTY;
+          }
+        })
+      )
+
+
+      .subscribe(curriculo => this.updateForm(curriculo));
 
 
     this.departamentos = this.departamentosService.getDepartamentos();
@@ -57,18 +65,18 @@ export class CadastroFormComponent implements OnInit {
 
     this.formulario = this.formBuilder.group({
 
-        _id: [null ],
-        nome: [null, Validators.required],
-        setor: [null , Validators.required],
-        senioridade: [null, Validators.required],
-        cidade: [null , Validators.required],
-        linkedin: [null , Validators.required],
-        nascimento: [null , Validators.required],
-        telefone: [null , Validators.required],
-        resumo: [null, Validators.required],
-        email: [null, [Validators.required, Validators.email]],
+      _id: [null],
+      nome: [null, Validators.required],
+      setor: [null, Validators.required],
+      senioridade: [null, Validators.required],
+      cidade: [null, Validators.required],
+      linkedin: [null, Validators.required],
+      nascimento: [null, Validators.required],
+      telefone: [null, Validators.required],
+      resumo: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
 
-      token:['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTlkMGZmNDQ4NWJkOTBmMzZkNTNlNyIsImVtYWlsIjoiamh1bGlhbmlzYW50b3NAZ21haWwuY29tIiwibmFtZSI6IkpodWxpIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2ODgzODUyNjQsImV4cCI6MTY4ODQ3MTY2NH0.6x_BaJnTmzelYBSa50AITiakCi31Xh-NNk21PIqjvco'],
+      token: ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTlkMGZmNDQ4NWJkOTBmMzZkNTNlNyIsImVtYWlsIjoiamh1bGlhbmlzYW50b3NAZ21haWwuY29tIiwibmFtZSI6IkpodWxpIiwicm9sZXMiOlsidXNlciJdLCJpYXQiOjE2ODg0OTU2NjAsImV4cCI6MTY4ODU4MjA2MH0.20S2-jJPW4SFG-nlMHlIkEuOMp9nXErTtIC7piRGhuU"],
       experienciaAcademica: this.formBuilder.array([]),
       experienciaProfissional: this.formBuilder.array([])
     });
@@ -78,50 +86,50 @@ export class CadastroFormComponent implements OnInit {
   }
 
 
-    updateForm(curriculo: any) {
-      const experienciaAcademicaArray = this.formulario.get('experienciaAcademica') as FormArray;
-      experienciaAcademicaArray.clear();
+  updateForm(curriculo: any) {
+    const experienciaAcademicaArray = this.formulario.get('experienciaAcademica') as FormArray;
+    experienciaAcademicaArray.clear();
 
-      const experienciaProfissionalArray = this.formulario.get('experienciaProfissional') as FormArray;
-      experienciaProfissionalArray.clear();
+    const experienciaProfissionalArray = this.formulario.get('experienciaProfissional') as FormArray;
+    experienciaProfissionalArray.clear();
 
-      curriculo.experienciaAcademica.forEach((experienciaAcademica: any) => {
-        experienciaAcademicaArray.push(
-          this.formBuilder.group({
-            nomeCurso: experienciaAcademica.nomeCurso,
-            dataInicio: experienciaAcademica.dataInicio,
-            dataFim: experienciaAcademica.dataFim,
-            nomeInstituicao: experienciaAcademica.nomeInstituicao
-          })
-        );
-      });
+    curriculo.experienciaAcademica.forEach((experienciaAcademica: any) => {
+      experienciaAcademicaArray.push(
+        this.formBuilder.group({
+          nomeCurso: experienciaAcademica.nomeCurso,
+          dataInicio: experienciaAcademica.dataInicio,
+          dataFim: experienciaAcademica.dataFim,
+          nomeInstituicao: experienciaAcademica.nomeInstituicao
+        })
+      );
+    });
 
-      curriculo.experienciaProfissional.forEach((experienciaProfissional: any) => {
-        experienciaProfissionalArray.push(
-          this.formBuilder.group({
-            nomeCargo: experienciaProfissional.nomeCargo,
-            dataInicio: experienciaProfissional.dataInicio,
-            dataFim: experienciaProfissional.dataFim,
-            nomeEmpresa: experienciaProfissional.nomeEmpresa
-          })
-        );
-      });
+    curriculo.experienciaProfissional.forEach((experienciaProfissional: any) => {
+      experienciaProfissionalArray.push(
+        this.formBuilder.group({
+          nomeCargo: experienciaProfissional.nomeCargo,
+          dataInicio: experienciaProfissional.dataInicio,
+          dataFim: experienciaProfissional.dataFim,
+          nomeEmpresa: experienciaProfissional.nomeEmpresa
+        })
+      );
+    });
 
-      this.formulario.patchValue({
+    this.formulario.patchValue({
 
-          _id: curriculo._id,
-          nome: curriculo.nome,
-          setor: curriculo.setor,
-          senioridade: curriculo.senioridade,
-          cidade: curriculo.cidade,
-          linkedin: curriculo.linkedin,
-          nascimento: curriculo.nascimento,
-          telefone: curriculo.telefone,
-          resumo: curriculo.resumo,
-          email: curriculo.email
+      _id: curriculo._id,
+      nome: curriculo.nome,
+      setor: curriculo.setor,
+      senioridade: curriculo.senioridade,
+      cidade: curriculo.cidade,
+      linkedin: curriculo.linkedin,
+      nascimento: curriculo.nascimento,
+      telefone: curriculo.telefone,
+      resumo: curriculo.resumo,
+      email: curriculo.email
 
-      });
-    }
+    });
+  }
 
 
 
@@ -138,7 +146,7 @@ export class CadastroFormComponent implements OnInit {
           this.location.back();
         },
         error: () => console.error('error')
-    });
+      });
 
     } else {
       console.log('Formulário inválido');
