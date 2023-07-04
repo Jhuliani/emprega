@@ -29,7 +29,7 @@ import { AuthService } from "../login/auth.service";
         FormExpAcadComponent,
         FormExpProfComponent,
         DetalheExpProfComponent,
-        DetalheExpAcadComponent
+        DetalheExpAcadComponent,
 
     ],
     providers: [CadastrosService,
